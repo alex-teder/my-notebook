@@ -1,8 +1,15 @@
 import s from './MyTextField.module.scss'
 
-export function MyTextField({type = 'text', label = null, placeholder = '', value, onChange}) {
+export function MyTextField({
+  type = 'text',
+  label = null,
+  placeholder = '',
+  append = null,
+  value,
+  onChange,
+}) {
   return (
-    <label>
+    <label className={s.label}>
       {label}
       <input
         type={type}
@@ -11,6 +18,7 @@ export function MyTextField({type = 'text', label = null, placeholder = '', valu
         onChange={onChange}
         className={s.input}
       />
+      {append && <div className={s.append}>{append}</div>}
     </label>
   )
 }

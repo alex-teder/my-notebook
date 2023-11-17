@@ -1,4 +1,14 @@
+.label {
+  position: relative;
+}
+
 .input {
   padding: 0.25rem;
   width: 100%;
+}
+
+.append {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
