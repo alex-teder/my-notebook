@@ -20,21 +20,36 @@ function Heading() {
   return <h1 className={s.heading}>Log in</h1>
 }
 
+function EyeButton({isHidden, onClick}) {
+  return (
+    <MyButton flat onClick={onClick}>
+      <i className="material-icons">{isHidden ? 'visibility_off' : 'visibility'}</i>
+    </MyButton>
+  )
+}
+
 function LogInForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isPassHidden, setIsPassHidden] = useState(true)
 
   const handleSubmit = event => {
     event.preventDefault()
-    console.log('Email:', email)
-    console.log('Password:', password)
     alert('Form submitted')
   }
+
+  const eyeButton = <EyeButton isHidden={isPassHidden} onClick={() => setIsPassHidden(v => !v)} />
 
   return (
     <form className={s.form} onSubmit={handleSubmit}>
       <MyTextField label="Email:" value={email} onChange={e => setEmail(e.target.value)} />
-      <MyTextField label="Password:" value={password} onChange={e => setPassword(e.target.value)} />
+      <MyTextField
+        label="Password:"
+        append={eyeButton}
+        type={isPassHidden ? 'password' : 'text'}
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+      />
       <MyButton type="submit">Log in</MyButton>
     </form>
   )
