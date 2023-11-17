@@ -3,5 +3,18 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.25rem 0.25rem;
+  padding: 0.25rem;
+}
+
+.flat {
+  margin: 0.2rem;
+  background: none;
+  outline: none;
+  border-radius: 50%;
+  border: none;
+}
+
+.flat:hover,
+.flat:focus {
+  background-color: rgba(0, 0, 0, 0.1);
 }
