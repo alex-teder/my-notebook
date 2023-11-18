@@ -1,14 +1,19 @@
+@import "../../styles/variables";
+
 .button {
+  padding: 0.25rem;
+  border: 1px solid $clr-border;
+  border-radius: $border-radius;
+
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.25rem;
 }
 
 .flat {
   composes: button;
-  margin: 0.2rem;
+  margin: 0.175rem;
   background: none;
   outline: none;
   border-radius: 50%;
