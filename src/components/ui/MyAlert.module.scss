@@ -1,0 +1,23 @@
+@import "../../styles/variables";
+
+.alert {
+  padding: 0.5rem;
+  font-size: 0.825rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid grey;
+}
+
+.error {
+  composes: alert;
+  background-color: $clr-bkg-error;
+}
+
+.warning {
+  composes: alert;
+  background-color: $clr-bkg-warning;
+}
+
+.success {
+  composes: alert;
+  background-color: $clr-bkg-success;
+}
