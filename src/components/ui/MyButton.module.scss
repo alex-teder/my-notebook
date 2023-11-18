@@ -7,6 +7,7 @@
 }
 
 .flat {
+  composes: button;
   margin: 0.2rem;
   background: none;
   outline: none;

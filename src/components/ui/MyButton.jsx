@@ -8,7 +8,7 @@ export function MyButton({
   ariaLabel = undefined,
   onClick,
 }) {
-  const className = flat ? `${buttonStyle} ${flatStyle}` : buttonStyle
+  const className = flat ? flatStyle : buttonStyle
 
   return (
     <button
