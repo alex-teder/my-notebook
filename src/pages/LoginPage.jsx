@@ -47,6 +47,7 @@ function LogInForm() {
         label="Password:"
         append={eyeButton}
         type={isPassHidden ? 'password' : 'text'}
+        inputClassName={s.pwinput}
         value={password}
         onChange={e => setPassword(e.target.value)}
       />
