@@ -9,7 +9,7 @@ import {MyAlert} from '../components/ui/MyAlert'
 export function LoginPage() {
   return (
     <LayoutWrapper>
-      <MyCard className={s.card}>
+      <MyCard width="300px">
         <Heading />
         <LogInForm />
       </MyCard>
