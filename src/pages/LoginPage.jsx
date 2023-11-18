@@ -4,6 +4,7 @@ import {MyCard} from '../components/ui/MyCard'
 import {MyTextField} from '../components/ui/MyTextField'
 import {MyButton} from '../components/ui/MyButton'
 import {useState} from 'react'
+import {MyAlert} from '../components/ui/MyAlert'
 
 export function LoginPage() {
   return (
@@ -32,10 +33,11 @@ function LogInForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isPassHidden, setIsPassHidden] = useState(true)
+  const [loginError, setLoginError] = useState(null)
 
   const handleSubmit = event => {
     event.preventDefault()
-    alert('Form submitted')
+    setLoginError(new Error('User not found'))
   }
 
   const eyeButton = <EyeButton isHidden={isPassHidden} onClick={() => setIsPassHidden(v => !v)} />
@@ -50,6 +52,13 @@ function LogInForm() {
         value={password}
         onChange={e => setPassword(e.target.value)}
       />
+
+      {loginError && (
+        <MyAlert type="error" heading="Error:">
+          {loginError.message}
+        </MyAlert>
+      )}
+
       <MyButton type="submit">Log in</MyButton>
     </form>
   )
