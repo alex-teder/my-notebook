@@ -5,10 +5,11 @@ export function MyTextField({
   label = null,
   placeholder = '',
   append = null,
-  inputClassName = '',
   value,
   onChange,
 }) {
+  const className = append ? s.inputWithAppend : s.input
+
   return (
     <label className={s.label}>
       {label}
@@ -17,7 +18,7 @@ export function MyTextField({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className={`${s.input} ${inputClassName}`}
+        className={className}
       />
       {append && <div className={s.append}>{append}</div>}
     </label>

@@ -7,6 +7,11 @@
   width: 100%;
 }
 
+.inputWithAppend {
+  composes: input;
+  padding-right: 2rem;
+}
+
 .append {
   position: absolute;
   bottom: 0;
