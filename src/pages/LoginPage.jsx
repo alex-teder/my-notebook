@@ -22,7 +22,7 @@ function Heading() {
 
 function EyeButton({isHidden, onClick}) {
   return (
-    <MyButton flat onClick={onClick}>
+    <MyButton flat ariaLabel={`${isHidden ? 'show' : 'hide'} password`} onClick={onClick}>
       <i className="material-icons">{isHidden ? 'visibility_off' : 'visibility'}</i>
     </MyButton>
   )
