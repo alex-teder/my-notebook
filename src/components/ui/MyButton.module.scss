@@ -16,11 +16,11 @@
   margin: 0.12rem;
   background: none;
   outline: none;
-  border-radius: 50%;
+  border-radius: $border-radius;
   border: none;
 }
 
 .flat:hover,
-.flat:focus {
-  background-color: rgba(0, 0, 0, 0.1);
+.flat:focus-visible {
+  background-color: rgba(0, 0, 0, 0.075);
 }
