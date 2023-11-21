@@ -6,7 +6,7 @@ export function PersonalNotesPage() {
   return (
     <MainLayoutWrapper>
       <h1>Personal notes</h1>
-      <NoteList notes={mockNotes} />
+      <NoteList notes={mockNotes} editable />
     </MainLayoutWrapper>
   )
 }

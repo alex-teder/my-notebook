@@ -56,7 +56,6 @@ export function EditDialog({note = EMPTY_NOTE, close}) {
 
           <div className={s.formSubdiv}>
             <MyColorPicker label="Select color:" value={color} onChange={handler(setColor)} />
-
             <MyCheckbox
               label="Make public:"
               value={isPublic}

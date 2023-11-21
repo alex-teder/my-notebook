@@ -4,10 +4,12 @@ import {NoteItemContent} from './NoteItemContent'
 import {NoteItemDetails} from './NoteItemDetails'
 import {NoteItemActions} from './NoteItemActions'
 import {ConfirmDeleteDialog} from '../../ConfirmDeleteDialog'
+import {EditDialog} from '../../EditDialog'
 
-export function NoteItem({note}) {
+export function NoteItem({note, isEditable}) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isDeleteDialog, setIsDeleteDialog] = useState(false)
+  const [isEditDialog, setIsEditDialog] = useState(false)
 
   return (
     <>
@@ -15,13 +17,14 @@ export function NoteItem({note}) {
         <NoteItemContent note={note} isExpanded={isExpanded} />
         <NoteItemDetails note={note} />
         <NoteItemActions
-          onEdit={() => {}}
-          onDelete={() => setIsDeleteDialog(true)}
+          onEdit={isEditable ? () => setIsEditDialog(true) : null}
+          onDelete={isEditable ? () => setIsDeleteDialog(true) : null}
           isExpanded={isExpanded}
           onExpand={() => setIsExpanded(v => !v)}
         />
       </MyCard>
 
+      {isEditDialog && <EditDialog note={{...note}} close={() => setIsEditDialog(false)} />}
       {isDeleteDialog && <ConfirmDeleteDialog note={note} close={() => setIsDeleteDialog(false)} />}
     </>
   )

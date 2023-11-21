@@ -8,12 +8,19 @@ export function NoteItemDetails({note}) {
         <b>Author: </b>
         {note.owner}
       </div>
+
       <div className={s.tags}>
         <b>Tags: </b>
         {note.tags.map((tag, idx) => (
           <MyChip key={`${tag}${idx}`}>{tag}</MyChip>
         ))}
       </div>
+
+      {note.isPublic && (
+        <i className="material-icons" aria-label="public note">
+          group
+        </i>
+      )}
     </div>
   )
 }
