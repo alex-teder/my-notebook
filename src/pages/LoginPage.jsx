@@ -1,10 +1,10 @@
-import s from './LoginPage.module.scss'
+import {useState} from 'react'
 import {LayoutWrapper} from '../components/LayoutWrapper'
 import {MyCard} from '../components/ui/MyCard'
 import {MyTextField} from '../components/ui/MyTextField'
 import {MyButton} from '../components/ui/MyButton'
-import {useState} from 'react'
 import {MyAlert} from '../components/ui/MyAlert'
+import s from './LoginPage.module.scss'
 
 export function LoginPage() {
   return (
@@ -45,6 +45,7 @@ function LogInForm() {
   return (
     <form className={s.form} onSubmit={handleSubmit}>
       <MyTextField label="Email:" value={email} onChange={e => setEmail(e.target.value)} />
+
       <MyTextField
         label="Password:"
         append={eyeButton}
