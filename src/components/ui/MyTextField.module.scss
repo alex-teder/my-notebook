@@ -1,0 +1,23 @@
+@import "../../styles/variables";
+
+.label {
+  position: relative;
+}
+
+.input {
+  padding: 0.25rem;
+  width: 100%;
+  border: 1px solid $clr-border;
+  border-radius: $border-radius;
+}
+
+.inputWithAppend {
+  composes: input;
+  padding-right: 2rem;
+}
+
+.append {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
