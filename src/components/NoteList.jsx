@@ -1,22 +1,18 @@
 import {NoteItem} from './NoteItem'
 import s from './NoteList.module.scss'
 
-export function NoteList({data}) {
-  // if (!data || !data.length) {
-  //   return <p>No data...</p>
-  // }
+export function NoteList({notes}) {
+  if (!notes || !notes.length) {
+    return <p>No data...</p>
+  }
 
   return (
     <ul className={s.list}>
-      <li>
-        <NoteItem />
-      </li>
-      <li>
-        <NoteItem />
-      </li>
-      <li>
-        <NoteItem />
-      </li>
+      {notes.map(note => (
+        <li key={note.id}>
+          <NoteItem note={note} />
+        </li>
+      ))}
     </ul>
   )
 }

@@ -4,32 +4,29 @@ import {MyButton} from './ui/MyButton'
 import {MyChip} from './ui/MyChip'
 import s from './NoteItem.module.scss'
 
-export function NoteItem() {
+export function NoteItem({note}) {
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
-    <MyCard rounded color="green">
+    <MyCard rounded color={note.color}>
       <NoteItemContent>
-        <div className={s.heading}>Lorem ipsum dolor sit amet.</div>
-        <div className={isExpanded ? s.text : s.textHidden}>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur accusantium
-          laboriosam harum odit tempora ex fugiat. Cumque, provident nesciunt quisquam sint velit
-          ducimus saepe, assumenda laboriosam aliquam vel quaerat iure animi magnam excepturi eius,
-          porro error quia ullam impedit. Molestias error vero ipsum dicta earum exercitationem
-          consequatur impedit deleniti perferendis!
-        </div>
+        <div className={s.heading}>{note.title}</div>
+        <div className={isExpanded ? s.text : s.textHidden}>{note.text}</div>
       </NoteItemContent>
+
       <NoteItemDetails>
         <div>
-          <b>Author: </b>Alex
+          <b>Author: </b>
+          {note.owner}
         </div>
         <div className={s.tags}>
           <b>Tags: </b>
-          <MyChip>tag1</MyChip>
-          <MyChip>tag2</MyChip>
-          <MyChip>tag with a longer name</MyChip>
+          {note.tags.map((tag, idx) => (
+            <MyChip key={`${tag}${idx}`}>{tag}</MyChip>
+          ))}
         </div>
       </NoteItemDetails>
+
       <NoteItemActions>
         <MyButton flat>Edit</MyButton>
         <MyButton flat>Delete</MyButton>
