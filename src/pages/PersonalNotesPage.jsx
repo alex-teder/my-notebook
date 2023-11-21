@@ -1,5 +1,5 @@
-import {NoteList} from '../components/NoteList'
-import {MainLayoutWrapper} from '../components/MainLayoutWrapper'
+import {NoteList} from '../components/notes/NoteList'
+import {MainLayoutWrapper} from '../components/layout/MainLayoutWrapper'
 import {mockNotes} from '../utils/mockNotes'
 
 export function PersonalNotesPage() {

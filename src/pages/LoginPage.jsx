@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {CenterLayoutWrapper} from '../components/CenterLayoutWrapper'
+import {CenterLayoutWrapper} from '../components/layout/CenterLayoutWrapper'
 import {MyCard} from '../components/ui/MyCard'
 import {MyTextField} from '../components/ui/MyTextField'
 import {MyButton} from '../components/ui/MyButton'
