@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {LayoutWrapper} from '../components/LayoutWrapper'
+import {CenterLayoutWrapper} from '../components/CenterLayoutWrapper'
 import {MyCard} from '../components/ui/MyCard'
 import {MyTextField} from '../components/ui/MyTextField'
 import {MyButton} from '../components/ui/MyButton'
@@ -8,12 +8,12 @@ import s from './LoginPage.module.scss'
 
 export function LoginPage() {
   return (
-    <LayoutWrapper>
+    <CenterLayoutWrapper>
       <MyCard width="300px">
         <Heading />
         <LogInForm />
       </MyCard>
-    </LayoutWrapper>
+    </CenterLayoutWrapper>
   )
 }
 
