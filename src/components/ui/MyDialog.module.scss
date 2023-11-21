@@ -1,6 +1,6 @@
 .bkg {
   height: 100dvh;
-  position: absolute;
+  position: fixed;
   inset: 0;
   background-color: rgba($color: #000000, $alpha: 0.25);
   display: flex;

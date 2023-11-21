@@ -1,7 +1,7 @@
 @import "../../styles/variables";
 
 .button {
-  padding: 0.25rem;
+  padding: 0.25rem 0.5rem;
   border: 1px solid $clr-border;
   border-radius: $border-radius;
 
@@ -13,6 +13,7 @@
 
 .flat {
   composes: button;
+  padding: 0.25rem;
   margin: 0.12rem;
   background: none;
   outline: none;
