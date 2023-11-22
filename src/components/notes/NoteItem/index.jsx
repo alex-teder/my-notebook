@@ -6,10 +6,12 @@ import {NoteItemActions} from './NoteItemActions'
 import {ConfirmDeleteDialog} from '../../ConfirmDeleteDialog'
 import {EditDialog} from '../../EditDialog'
 
-export function NoteItem({note, isEditable}) {
+export function NoteItem({note, isEditable, isFavable}) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isDeleteDialog, setIsDeleteDialog] = useState(false)
   const [isEditDialog, setIsEditDialog] = useState(false)
+
+  const handleFavClick = () => {}
 
   return (
     <>
@@ -19,6 +21,7 @@ export function NoteItem({note, isEditable}) {
         <NoteItemActions
           onEdit={isEditable ? () => setIsEditDialog(true) : null}
           onDelete={isEditable ? () => setIsDeleteDialog(true) : null}
+          onFav={isFavable ? handleFavClick : null}
           isExpanded={isExpanded}
           onExpand={() => setIsExpanded(v => !v)}
         />

@@ -6,7 +6,7 @@ export function PublicNotesPage() {
   return (
     <MainLayoutWrapper>
       <h1>Public notes</h1>
-      <NoteList notes={mockNotes} />
+      <NoteList notes={mockNotes} favable />
     </MainLayoutWrapper>
   )
 }

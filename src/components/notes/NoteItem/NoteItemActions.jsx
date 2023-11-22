@@ -1,7 +1,7 @@
 import {MyButton} from '../../ui/MyButton'
 import s from './NoteItemActions.module.scss'
 
-export function NoteItemActions({onEdit, onDelete, isExpanded, onExpand}) {
+export function NoteItemActions({onEdit, onDelete, onFav, isExpanded, onExpand}) {
   return (
     <div className={s.actions}>
       {onEdit && (
@@ -13,6 +13,12 @@ export function NoteItemActions({onEdit, onDelete, isExpanded, onExpand}) {
       {onDelete && (
         <MyButton flat onClick={onDelete}>
           Delete
+        </MyButton>
+      )}
+
+      {onFav && (
+        <MyButton flat ariaLabel="add to favorites" onClick={onFav}>
+          <i className="material-icons">star_outline</i>
         </MyButton>
       )}
 

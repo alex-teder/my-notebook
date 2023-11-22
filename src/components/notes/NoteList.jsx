@@ -1,7 +1,7 @@
 import {NoteItem} from './NoteItem'
 import s from './NoteList.module.scss'
 
-export function NoteList({notes, editable}) {
+export function NoteList({notes, editable, favable}) {
   if (!notes || !notes.length) {
     return <p>No data...</p>
   }
@@ -10,7 +10,7 @@ export function NoteList({notes, editable}) {
     <ul className={s.list}>
       {notes.map(note => (
         <li key={note.id}>
-          <NoteItem note={note} isEditable={editable} />
+          <NoteItem note={note} isEditable={editable} isFavable={favable} />
         </li>
       ))}
     </ul>
