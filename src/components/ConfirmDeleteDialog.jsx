@@ -11,7 +11,7 @@ export function ConfirmDeleteDialog({note, close}) {
         <p className={s.noteTitle}>{note.title}</p>
         <div className={s.actions}>
           <MyButton onClick={close}>Cancel</MyButton>
-          <MyButton>Confirm</MyButton>
+          <MyButton accent>Confirm</MyButton>
         </div>
       </MyCard>
     </MyDialog>

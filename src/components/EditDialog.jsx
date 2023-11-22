@@ -65,7 +65,9 @@ export function EditDialog({note = EMPTY_NOTE, close}) {
 
           <div className={s.actions}>
             <MyButton onClick={close}>Cancel</MyButton>
-            <MyButton type="submit">Confirm</MyButton>
+            <MyButton accent type="submit">
+              Confirm
+            </MyButton>
           </div>
         </form>
       </MyCard>

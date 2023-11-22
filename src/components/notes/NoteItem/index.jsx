@@ -24,7 +24,7 @@ export function NoteItem({note, isEditable}) {
         />
       </MyCard>
 
-      {isEditDialog && <EditDialog note={{...note}} close={() => setIsEditDialog(false)} />}
+      {isEditDialog && <EditDialog note={note} close={() => setIsEditDialog(false)} />}
       {isDeleteDialog && <ConfirmDeleteDialog note={note} close={() => setIsDeleteDialog(false)} />}
     </>
   )

@@ -60,7 +60,9 @@ function LogInForm() {
         </MyAlert>
       )}
 
-      <MyButton type="submit">Log in</MyButton>
+      <MyButton accent type="submit">
+        Log in
+      </MyButton>
     </form>
   )
 }
