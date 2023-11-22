@@ -12,6 +12,7 @@ const EMPTY_NOTE = {
   title: '',
   text: '',
   tags: [],
+  color: '#808080',
   owner: '',
   isPublic: false,
 }
