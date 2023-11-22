@@ -1,13 +1,20 @@
-import {button as buttonStyle, flat as flatStyle} from './MyButton.module.scss'
+import {
+  button as buttonStyle,
+  flat as flatStyle,
+  accent as accentStyle,
+} from './MyButton.module.scss'
 
 export function MyButton({
   children,
   flat = false,
+  accent = false,
   type = 'button',
   ariaLabel = undefined,
   onClick,
 }) {
-  const className = flat ? flatStyle : buttonStyle
+  let className = buttonStyle
+  if (flat) className = flatStyle
+  if (accent) className = accentStyle
 
   return (
     <button type={type} className={className} aria-label={ariaLabel} onClick={onClick}>
