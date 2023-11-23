@@ -2,16 +2,17 @@ import {useContext} from 'react'
 import {LocaleContext} from '../locales/LocaleProvider'
 
 export function useLocale(page) {
-  const {locale, fallback} = useContext(LocaleContext)
+  const {current, fallback} = useContext(LocaleContext)
 
   const $t = key => {
     let value
 
     if (page) {
-      value = locale[page][key]
+      value = current[page][key]
     } else {
-      value = locale[key]
+      value = current[key]
     }
+
     if (value) return value
 
     console.warn('No such key in current locale.')
@@ -21,6 +22,7 @@ export function useLocale(page) {
     } else {
       value = fallback[key]
     }
+
     if (value) return value
 
     console.warn('No such key in fallback locale.')

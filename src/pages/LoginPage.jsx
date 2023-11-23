@@ -5,6 +5,7 @@ import {MyTextField} from '../components/ui/MyTextField'
 import {MyButton} from '../components/ui/MyButton'
 import {MyAlert} from '../components/ui/MyAlert'
 import {useLocale} from '../hooks/useLocale'
+import {LangChanger} from '../components/LangChanger'
 import s from './LoginPage.module.scss'
 
 export function LoginPage() {
@@ -14,6 +15,7 @@ export function LoginPage() {
         <Heading />
         <LogInForm />
       </MyCard>
+      <LangChanger />
     </CenterLayoutWrapper>
   )
 }

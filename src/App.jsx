@@ -8,6 +8,8 @@ function App() {
   return (
     <LocaleProvider>
       <LoginPage />
+      {/* <PublicNotesPage /> */}
+      {/* <PersonalNotesPage /> */}
     </LocaleProvider>
   )
 }

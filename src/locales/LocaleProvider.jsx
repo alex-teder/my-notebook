@@ -10,11 +10,11 @@ const locales = {
 export const LocaleContext = createContext()
 
 export function LocaleProvider({children}) {
-  const [currentLang, setCurrentLang] = useState('ru')
+  const [currentLang, setCurrentLang] = useState('en')
 
   return (
     <LocaleContext.Provider
-      value={{locale: locales[currentLang], fallback: en, setLocale: setCurrentLang}}>
+      value={{current: locales[currentLang], fallback: en, currentLang, setCurrentLang}}>
       {children}
     </LocaleContext.Provider>
   )

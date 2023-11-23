@@ -10,6 +10,7 @@ export function MyButton({
   accent = false,
   type = 'button',
   ariaLabel = undefined,
+  disabled = false,
   onClick,
 }) {
   let className = buttonStyle
@@ -17,7 +18,12 @@ export function MyButton({
   if (accent) className = accentStyle
 
   return (
-    <button type={type} className={className} aria-label={ariaLabel} onClick={onClick}>
+    <button
+      type={type}
+      className={className}
+      aria-label={ariaLabel}
+      disabled={disabled}
+      onClick={onClick}>
       {children}
     </button>
   )
