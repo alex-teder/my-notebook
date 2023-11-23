@@ -1,4 +1,4 @@
-import {MyButton} from '../../ui/MyButton'
+import {MyButton} from '/src/components/ui/MyButton'
 import s from './NoteItemActions.module.scss'
 
 export function NoteItemActions({onEdit, onDelete, onFav, isExpanded, onExpand}) {

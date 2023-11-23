@@ -1,6 +1,6 @@
-import {MyDialog} from './ui/MyDialog'
-import {MyCard} from './ui/MyCard'
-import {MyButton} from './ui/MyButton'
+import {MyDialog} from '/src/components/ui/MyDialog'
+import {MyCard} from '/src/components/ui/MyCard'
+import {MyButton} from '/src/components/ui/MyButton'
 import s from './ConfirmDeleteDialog.module.scss'
 
 export function ConfirmDeleteDialog({note, close}) {

@@ -1,6 +1,6 @@
 import {useContext} from 'react'
-import {MyButton} from './ui/MyButton'
-import {LocaleContext} from '../locales/LocaleProvider'
+import {MyButton} from '/src/components/ui/MyButton'
+import {LocaleContext} from '/src/locales/LocaleProvider'
 import s from './LangChanger.module.scss'
 
 export function LangChanger() {

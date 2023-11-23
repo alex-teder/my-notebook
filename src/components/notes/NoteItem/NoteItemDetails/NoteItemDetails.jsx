@@ -1,4 +1,4 @@
-import {MyChip} from '../../ui/MyChip'
+import {MyChip} from '/src/components/ui/MyChip'
 import s from './NoteItemDetails.module.scss'
 
 export function NoteItemDetails({note}) {

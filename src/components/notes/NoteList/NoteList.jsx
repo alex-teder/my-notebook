@@ -1,4 +1,4 @@
-import {NoteItem} from './NoteItem'
+import {NoteItem} from '../NoteItem'
 import s from './NoteList.module.scss'
 
 export function NoteList({notes, editable, favable}) {

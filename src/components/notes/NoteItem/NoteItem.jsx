@@ -1,10 +1,10 @@
 import {useState} from 'react'
-import {MyCard} from '../../ui/MyCard'
-import {NoteItemContent} from './NoteItemContent'
-import {NoteItemDetails} from './NoteItemDetails'
-import {NoteItemActions} from './NoteItemActions'
-import {ConfirmDeleteDialog} from '../../ConfirmDeleteDialog'
-import {EditDialog} from '../../EditDialog'
+import {MyCard} from '/src/components/ui/MyCard'
+import {NoteItemContent} from './NoteItemContent/NoteItemContent'
+import {NoteItemDetails} from './NoteItemDetails/NoteItemDetails'
+import {NoteItemActions} from './NoteItemActions/NoteItemActions'
+import {ConfirmDeleteDialog} from '/src/components/ConfirmDeleteDialog'
+import {EditDialog} from '/src/components/EditDialog'
 
 export function NoteItem({note, isEditable, isFavable}) {
   const [isExpanded, setIsExpanded] = useState(false)

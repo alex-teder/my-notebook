@@ -1,7 +1,7 @@
-import {NoteList} from '../components/notes/NoteList'
-import {MainLayoutWrapper} from '../components/layout/MainLayoutWrapper'
-import {mockNotes} from '../utils/mockNotes'
-import {NewNoteButton} from '../components/NewNoteButton'
+import {NoteList} from '/src/components/notes/NoteList'
+import {MainLayoutWrapper} from '/src/components/layout/MainLayoutWrapper'
+import {mockNotes} from '/src/utils/mockNotes'
+import {NewNoteButton} from '/src/components/NewNoteButton'
 import s from './PersonalNotesPage.module.scss'
 
 export function PersonalNotesPage() {

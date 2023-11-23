@@ -1,6 +1,6 @@
 import {useState} from 'react'
-import {MyButton} from './ui/MyButton'
-import {EditDialog} from './EditDialog'
+import {MyButton} from '/src/components/ui/MyButton'
+import {EditDialog} from '/src/components/EditDialog'
 
 export function NewNoteButton() {
   const [isEditDialog, setIsEditDialog] = useState(false)
