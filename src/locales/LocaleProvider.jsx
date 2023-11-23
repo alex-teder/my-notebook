@@ -10,7 +10,7 @@ const locales = {
 export const LocaleContext = createContext()
 
 export function LocaleProvider({children}) {
-  const [currentLang, setCurrentLang] = useState('en')
+  const [currentLang, setCurrentLang] = useState('ru')
 
   return (
     <LocaleContext.Provider

@@ -4,6 +4,7 @@ import {MyCard} from '../components/ui/MyCard'
 import {MyTextField} from '../components/ui/MyTextField'
 import {MyButton} from '../components/ui/MyButton'
 import {MyAlert} from '../components/ui/MyAlert'
+import {useLocale} from '../hooks/useLocale'
 import s from './LoginPage.module.scss'
 
 export function LoginPage() {
@@ -18,7 +19,9 @@ export function LoginPage() {
 }
 
 function Heading() {
-  return <h1 className={s.heading}>Log in</h1>
+  const {$t} = useLocale('loginPage')
+
+  return <h1 className={s.heading}>{$t('log_in')}</h1>
 }
 
 function EyeButton({isHidden, onClick}) {
@@ -30,6 +33,7 @@ function EyeButton({isHidden, onClick}) {
 }
 
 function LogInForm() {
+  const {$t} = useLocale('loginPage')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isPassHidden, setIsPassHidden] = useState(true)
@@ -37,7 +41,7 @@ function LogInForm() {
 
   const handleSubmit = event => {
     event.preventDefault()
-    setLoginError(new Error('User not found'))
+    setLoginError(new Error($t('user_not_found')))
   }
 
   const eyeButton = <EyeButton isHidden={isPassHidden} onClick={() => setIsPassHidden(v => !v)} />
@@ -47,7 +51,7 @@ function LogInForm() {
       <MyTextField label="Email:" value={email} onChange={e => setEmail(e.target.value)} />
 
       <MyTextField
-        label="Password:"
+        label={$t('password')}
         append={eyeButton}
         type={isPassHidden ? 'password' : 'text'}
         value={password}
@@ -55,13 +59,13 @@ function LogInForm() {
       />
 
       {loginError && (
-        <MyAlert type="error" heading="Error:">
+        <MyAlert type="error" heading={$t('error')}>
           {loginError.message}
         </MyAlert>
       )}
 
       <MyButton accent type="submit">
-        Log in
+        {$t('log_in')}
       </MyButton>
     </form>
   )
