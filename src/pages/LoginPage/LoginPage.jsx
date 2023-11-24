@@ -1,24 +1,29 @@
 import {useState} from 'react'
-import {LayoutWrapper} from '../components/LayoutWrapper'
-import {MyCard} from '../components/ui/MyCard'
-import {MyTextField} from '../components/ui/MyTextField'
-import {MyButton} from '../components/ui/MyButton'
-import {MyAlert} from '../components/ui/MyAlert'
+import {CenterLayoutWrapper} from '/src/components/layout/CenterLayoutWrapper'
+import {MyCard} from '/src/components/ui/MyCard'
+import {MyTextField} from '/src/components/ui/MyTextField'
+import {MyButton} from '/src/components/ui/MyButton'
+import {MyAlert} from '/src/components/ui/MyAlert'
+import {useLocale} from '/src/hooks/useLocale'
+import {LangChanger} from '/src/components/LangChanger'
 import s from './LoginPage.module.scss'
 
 export function LoginPage() {
   return (
-    <LayoutWrapper>
+    <CenterLayoutWrapper>
       <MyCard width="300px">
         <Heading />
         <LogInForm />
       </MyCard>
-    </LayoutWrapper>
+      <LangChanger />
+    </CenterLayoutWrapper>
   )
 }
 
 function Heading() {
-  return <h1 className={s.heading}>Log in</h1>
+  const {$t} = useLocale()
+
+  return <h1 className={s.heading}>{$t('loginPage.log_in')}</h1>
 }
 
 function EyeButton({isHidden, onClick}) {
@@ -30,6 +35,7 @@ function EyeButton({isHidden, onClick}) {
 }
 
 function LogInForm() {
+  const {$t} = useLocale()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isPassHidden, setIsPassHidden] = useState(true)
@@ -37,7 +43,7 @@ function LogInForm() {
 
   const handleSubmit = event => {
     event.preventDefault()
-    setLoginError(new Error('User not found'))
+    setLoginError(new Error($t('loginPage.user_not_found')))
   }
 
   const eyeButton = <EyeButton isHidden={isPassHidden} onClick={() => setIsPassHidden(v => !v)} />
@@ -47,7 +53,7 @@ function LogInForm() {
       <MyTextField label="Email:" value={email} onChange={e => setEmail(e.target.value)} />
 
       <MyTextField
-        label="Password:"
+        label={$t('loginPage.password')}
         append={eyeButton}
         type={isPassHidden ? 'password' : 'text'}
         value={password}
@@ -55,12 +61,14 @@ function LogInForm() {
       />
 
       {loginError && (
-        <MyAlert type="error" heading="Error:">
+        <MyAlert type="error" heading={$t('loginPage.error')}>
           {loginError.message}
         </MyAlert>
       )}
 
-      <MyButton type="submit">Log in</MyButton>
+      <MyButton accent type="submit">
+        {$t('loginPage.log_in')}
+      </MyButton>
     </form>
   )
 }

@@ -1,0 +1,17 @@
+.heading {
+  font-weight: bold;
+}
+
+.text {
+  padding-right: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.825rem;
+}
+
+.textHidden {
+  composes: text;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,34 @@
+@import "/src/styles/variables";
+
+.button {
+  padding: 0.25rem 0.75rem;
+  background-color: white;
+  border: 1px solid $clr-border;
+  border-radius: $border-radius;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.flat {
+  composes: button;
+  padding: 0.25rem;
+  margin: 0.12rem;
+  background: none;
+  outline: none;
+  border-radius: $border-radius;
+  border: none;
+}
+
+.flat:hover,
+.flat:focus-visible {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.accent {
+  composes: button;
+  background-color: $clr-accent;
+  color: white;
+}

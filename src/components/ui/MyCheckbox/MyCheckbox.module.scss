@@ -1,0 +1,10 @@
+.label {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+
+  input {
+    cursor: pointer;
+    margin-left: 0.375rem;
+  }
+}
