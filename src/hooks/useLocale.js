@@ -15,6 +15,8 @@ export function useLocale() {
 
     if (result) return result
 
+    console.warn('No such key in current locale')
+
     result = keys.reduce((obj, key) => {
       if (obj && obj[key]) {
         return obj[key]
@@ -22,6 +24,8 @@ export function useLocale() {
     }, fallback)
 
     if (result) return result
+
+    console.warn('No such key in fallback locale')
 
     return '???'
   }

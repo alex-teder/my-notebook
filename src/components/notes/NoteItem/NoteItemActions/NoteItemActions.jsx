@@ -1,18 +1,21 @@
+import {useLocale} from '../../../../hooks/useLocale'
 import {MyButton} from '/src/components/ui/MyButton'
 import s from './NoteItemActions.module.scss'
 
 export function NoteItemActions({onEdit, onDelete, onFav, isExpanded, onExpand}) {
+  const {$t} = useLocale()
+
   return (
     <div className={s.actions}>
       {onEdit && (
         <MyButton flat onClick={onEdit}>
-          Edit
+          {$t('edit')}
         </MyButton>
       )}
 
       {onDelete && (
         <MyButton flat onClick={onDelete}>
-          Delete
+          {$t('delete')}
         </MyButton>
       )}
 

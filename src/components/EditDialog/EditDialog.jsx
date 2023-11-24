@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import {useLocale} from '/src/hooks/useLocale'
 import {MyDialog} from '/src/components/ui/MyDialog'
 import {MyCard} from '/src/components/ui/MyCard'
 import {MyButton} from '/src/components/ui/MyButton'
@@ -18,15 +19,18 @@ const EMPTY_NOTE = {
 }
 
 function Heading({noteId}) {
+  const {$t} = useLocale()
+
   return (
     <>
-      <h4>{noteId ? 'Edit note' : 'Create note'}</h4>
+      <h4>{noteId ? $t('editDialog.edit_note') : $t('editDialog.create_note')}</h4>
       {noteId && <p className={s.noteId}>id: {noteId}</p>}
     </>
   )
 }
 
 export function EditDialog({note = EMPTY_NOTE, close}) {
+  const {$t} = useLocale()
   const [title, setTitle] = useState(note.title)
   const [text, setText] = useState(note.text)
   const [tagsStr, setTagsStr] = useState(note.tags.join(', '))
@@ -45,29 +49,33 @@ export function EditDialog({note = EMPTY_NOTE, close}) {
         <Heading noteId={note.id} />
 
         <form className={s.form} onSubmit={handleSubmit}>
-          <MyTextField label="Title:" value={title} onChange={handler(setTitle)} />
+          <MyTextField label={$t('editDialog.title')} value={title} onChange={handler(setTitle)} />
 
-          <MyTextArea label="Text:" value={text} onChange={handler(setText)} />
+          <MyTextArea label={$t('editDialog.text')} value={text} onChange={handler(setText)} />
 
           <MyTextField
-            label="Tags: (comma separated)"
+            label={$t('editDialog.tags')}
             value={tagsStr}
             onChange={handler(setTagsStr)}
           />
 
           <div className={s.formSubdiv}>
-            <MyColorPicker label="Select color:" value={color} onChange={handler(setColor)} />
+            <MyColorPicker
+              label={$t('editDialog.color')}
+              value={color}
+              onChange={handler(setColor)}
+            />
             <MyCheckbox
-              label="Make public:"
+              label={$t('editDialog.public')}
               value={isPublic}
               onChange={() => setIsPublic(v => !v)}
             />
           </div>
 
           <div className={s.actions}>
-            <MyButton onClick={close}>Cancel</MyButton>
+            <MyButton onClick={close}>{$t('editDialog.cancel')}</MyButton>
             <MyButton accent type="submit">
-              Confirm
+              {$t('editDialog.confirm')}
             </MyButton>
           </div>
         </form>

@@ -1,9 +1,12 @@
+import {useLocale} from '../../../hooks/useLocale'
 import {NoteItem} from '../NoteItem'
 import s from './NoteList.module.scss'
 
 export function NoteList({notes, editable, favable}) {
+  const {$t} = useLocale()
+
   if (!notes || !notes.length) {
-    return <p>No data...</p>
+    return <p>{$t('no_data')}</p>
   }
 
   return (
