@@ -1,4 +1,4 @@
-import {useLocale} from '../../../../hooks/useLocale'
+import {useLocale} from '/src/hooks/useLocale'
 import {MyButton} from '/src/components/ui/MyButton'
 import s from './NoteItemActions.module.scss'
 

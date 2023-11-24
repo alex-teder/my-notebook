@@ -1,5 +1,5 @@
-import {useLocale} from '../../../hooks/useLocale'
-import {NoteItem} from '../NoteItem'
+import {useLocale} from '/src/hooks/useLocale'
+import {NoteItem} from '/src/components/notes/NoteItem'
 import s from './NoteList.module.scss'
 
 export function NoteList({notes, editable, favable}) {
