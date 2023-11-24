@@ -21,9 +21,9 @@ export function LoginPage() {
 }
 
 function Heading() {
-  const {$t} = useLocale('loginPage')
+  const {$t} = useLocale()
 
-  return <h1 className={s.heading}>{$t('log_in')}</h1>
+  return <h1 className={s.heading}>{$t('loginPage.log_in')}</h1>
 }
 
 function EyeButton({isHidden, onClick}) {
@@ -35,7 +35,7 @@ function EyeButton({isHidden, onClick}) {
 }
 
 function LogInForm() {
-  const {$t} = useLocale('loginPage')
+  const {$t} = useLocale()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isPassHidden, setIsPassHidden] = useState(true)
@@ -43,7 +43,7 @@ function LogInForm() {
 
   const handleSubmit = event => {
     event.preventDefault()
-    setLoginError(new Error($t('user_not_found')))
+    setLoginError(new Error($t('loginPage.user_not_found')))
   }
 
   const eyeButton = <EyeButton isHidden={isPassHidden} onClick={() => setIsPassHidden(v => !v)} />
@@ -53,7 +53,7 @@ function LogInForm() {
       <MyTextField label="Email:" value={email} onChange={e => setEmail(e.target.value)} />
 
       <MyTextField
-        label={$t('password')}
+        label={$t('loginPage.password')}
         append={eyeButton}
         type={isPassHidden ? 'password' : 'text'}
         value={password}
@@ -61,13 +61,13 @@ function LogInForm() {
       />
 
       {loginError && (
-        <MyAlert type="error" heading={$t('error')}>
+        <MyAlert type="error" heading={$t('loginPage.error')}>
           {loginError.message}
         </MyAlert>
       )}
 
       <MyButton accent type="submit">
-        {$t('log_in')}
+        {$t('loginPage.log_in')}
       </MyButton>
     </form>
   )

@@ -1,31 +1,28 @@
 import {useContext} from 'react'
 import {LocaleContext} from '../locales/LocaleProvider'
 
-export function useLocale(page) {
+export function useLocale() {
   const {current, fallback} = useContext(LocaleContext)
 
-  const $t = key => {
-    let value
+  const $t = keysStr => {
+    const keys = keysStr.split('.')
 
-    if (page) {
-      value = current[page][key]
-    } else {
-      value = current[key]
-    }
+    let result = keys.reduce((obj, key) => {
+      if (obj && obj[key]) {
+        return obj[key]
+      }
+    }, current)
 
-    if (value) return value
+    if (result) return result
 
-    console.warn('No such key in current locale.')
+    result = keys.reduce((obj, key) => {
+      if (obj && obj[key]) {
+        return obj[key]
+      }
+    }, fallback)
 
-    if (page) {
-      value = fallback[page][key]
-    } else {
-      value = fallback[key]
-    }
+    if (result) return result
 
-    if (value) return value
-
-    console.warn('No such key in fallback locale.')
     return '???'
   }
 
