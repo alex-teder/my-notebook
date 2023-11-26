@@ -2,6 +2,7 @@ import {createBrowserRouter, redirect} from 'react-router-dom'
 import {LoginPage} from '/src/pages/LoginPage'
 import {PublicNotesPage} from '/src/pages/PublicNotesPage'
 import {PersonalNotesPage} from '/src/pages/PersonalNotesPage'
+import {SettingsPage} from '/src/pages/SettingsPage'
 
 export const router = createBrowserRouter([
   {
@@ -21,5 +22,9 @@ export const router = createBrowserRouter([
   {
     path: '/personal',
     element: <PersonalNotesPage />,
+  },
+  {
+    path: '/settings',
+    element: <SettingsPage />,
   },
 ])
