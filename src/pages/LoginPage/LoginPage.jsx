@@ -7,6 +7,7 @@ import {MyButton} from '/src/components/ui/MyButton'
 import {MyAlert} from '/src/components/ui/MyAlert'
 import {useLocale} from '/src/hooks/useLocale'
 import {LangChanger} from '/src/components/LangChanger'
+import {PasswordField} from '../../components/PasswordField/PasswordField'
 import s from './LoginPage.module.scss'
 
 export function LoginPage() {
@@ -27,20 +28,11 @@ function Heading() {
   return <h1 className={s.heading}>{$t('loginPage.log_in')}</h1>
 }
 
-function EyeButton({isHidden, onClick}) {
-  return (
-    <MyButton flat ariaLabel={`${isHidden ? 'show' : 'hide'} password`} onClick={onClick}>
-      <i className="material-icons">{isHidden ? 'visibility_off' : 'visibility'}</i>
-    </MyButton>
-  )
-}
-
 function LogInForm() {
   const {$t} = useLocale()
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [isPassHidden, setIsPassHidden] = useState(true)
   const [loginError] = useState(null)
 
   const handleSubmit = event => {
@@ -49,16 +41,12 @@ function LogInForm() {
     navigate('/personal')
   }
 
-  const eyeButton = <EyeButton isHidden={isPassHidden} onClick={() => setIsPassHidden(v => !v)} />
-
   return (
     <form className={s.form} onSubmit={handleSubmit}>
       <MyTextField label="Email:" value={email} onChange={e => setEmail(e.target.value)} />
 
-      <MyTextField
+      <PasswordField
         label={$t('loginPage.password')}
-        append={eyeButton}
-        type={isPassHidden ? 'password' : 'text'}
         value={password}
         onChange={e => setPassword(e.target.value)}
       />
