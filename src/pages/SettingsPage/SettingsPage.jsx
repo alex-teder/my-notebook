@@ -24,7 +24,12 @@ export function SettingsPage() {
 
   return (
     <MainLayoutWrapper>
-      <h1>{$t('settings')}</h1>
+      <h1 className={s.heading}>
+        <MyButton flat ariaLabel="go back" onClick={() => window.history.back()}>
+          <i className="material-icons">arrow_back</i>
+        </MyButton>
+        {$t('settings')}
+      </h1>
 
       <div className={s.setting}>
         <b>Change language</b>
