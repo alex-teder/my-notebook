@@ -3,6 +3,7 @@ import {LoginPage} from '/src/pages/LoginPage'
 import {PublicNotesPage} from '/src/pages/PublicNotesPage'
 import {PersonalNotesPage} from '/src/pages/PersonalNotesPage'
 import {SettingsPage} from '/src/pages/SettingsPage'
+import {SingleNotePage} from '../pages/SingleNotePage'
 
 export const router = createBrowserRouter([
   {
@@ -29,5 +30,6 @@ export const router = createBrowserRouter([
   },
   {
     path: '/note/:noteId',
+    element: <SingleNotePage />,
   },
 ])
