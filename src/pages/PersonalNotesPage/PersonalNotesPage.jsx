@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import {useLocale} from '/src/hooks/useLocale'
 import {NoteList} from '/src/components/notes/NoteList'
 import {MainLayoutWrapper} from '/src/components/layout/MainLayoutWrapper'
@@ -11,6 +12,11 @@ export function PersonalNotesPage() {
   return (
     <MainLayoutWrapper>
       <h1>{$t('personal_notes')}</h1>
+
+      <div className={s.nav}>
+        <Link to="/public">Public notes</Link>
+        <Link to="/settings">Settings</Link>
+      </div>
 
       <div className={s.buttonContainer}>
         <NewNoteButton />

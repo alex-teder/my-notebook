@@ -51,3 +51,11 @@ button {
 body {
   position: relative;
 }
+
+a {
+  color: inherit;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
