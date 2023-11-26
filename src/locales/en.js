@@ -23,6 +23,7 @@ const en = {
   },
   public_notes: 'Public notes',
   personal_notes: 'Personal notes',
+  settings: 'Settings',
   new_note: 'New note',
   author: 'Author:',
   tags: 'Tags:',

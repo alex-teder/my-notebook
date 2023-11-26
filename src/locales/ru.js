@@ -23,6 +23,7 @@ const ru = {
   },
   public_notes: 'Общие заметки',
   personal_notes: 'Личные заметки',
+  settings: 'Настройки',
   new_note: 'Новая заметка',
   author: 'Автор:',
   tags: 'Тэги:',

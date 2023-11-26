@@ -14,8 +14,8 @@ export function PersonalNotesPage() {
       <h1>{$t('personal_notes')}</h1>
 
       <div className={s.nav}>
-        <Link to="/public">Public notes</Link>
-        <Link to="/settings">Settings</Link>
+        <Link to="/public">{$t('public_notes')}</Link>
+        <Link to="/settings">{$t('settings')}</Link>
       </div>
 
       <div className={s.buttonContainer}>

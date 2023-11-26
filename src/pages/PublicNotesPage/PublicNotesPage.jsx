@@ -13,8 +13,8 @@ export function PublicNotesPage() {
       <h1>{$t('public_notes')}</h1>
 
       <div className={s.nav}>
-        <Link to="/personal">Personal notes</Link>
-        <Link to="/settings">Settings</Link>
+        <Link to="/personal">{$t('personal_notes')}</Link>
+        <Link to="/settings">{$t('settings')}</Link>
       </div>
 
       <NoteList notes={mockNotes} favable />
