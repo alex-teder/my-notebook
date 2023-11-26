@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 import {CenterLayoutWrapper} from '/src/components/layout/CenterLayoutWrapper'
 import {MyCard} from '/src/components/ui/MyCard'
 import {MyTextField} from '/src/components/ui/MyTextField'
@@ -36,14 +37,16 @@ function EyeButton({isHidden, onClick}) {
 
 function LogInForm() {
   const {$t} = useLocale()
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isPassHidden, setIsPassHidden] = useState(true)
-  const [loginError, setLoginError] = useState(null)
+  const [loginError] = useState(null)
 
   const handleSubmit = event => {
     event.preventDefault()
-    setLoginError(new Error($t('loginPage.user_not_found')))
+    // setLoginError(new Error($t('loginPage.user_not_found')))
+    navigate('/personal')
   }
 
   const eyeButton = <EyeButton isHidden={isPassHidden} onClick={() => setIsPassHidden(v => !v)} />
