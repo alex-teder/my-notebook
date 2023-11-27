@@ -7,22 +7,27 @@ import {NewNoteButton} from '/src/components/NewNoteButton'
 import s from './PersonalNotesPage.module.scss'
 
 export function PersonalNotesPage() {
-  const {$t} = useLocale()
-
   return (
     <MainLayoutWrapper>
-      <h1>{$t('personal_notes')}</h1>
-
-      <div className={s.nav}>
-        <Link to="/public">{$t('public_notes')}</Link>
-        <Link to="/settings">{$t('settings')}</Link>
-      </div>
-
-      <div className={s.buttonContainer}>
-        <NewNoteButton />
-      </div>
-
+      <Heading />
+      <NavBar />
+      <NewNoteButton />
       <NoteList notes={mockNotes} editable />
     </MainLayoutWrapper>
+  )
+}
+
+function Heading() {
+  const {$t} = useLocale()
+  return <h1>{$t('personal_notes')}</h1>
+}
+
+function NavBar() {
+  const {$t} = useLocale()
+  return (
+    <div className={s.nav}>
+      <Link to="/public">{$t('public_notes')}</Link>
+      <Link to="/settings">{$t('settings')}</Link>
+    </div>
   )
 }

@@ -15,16 +15,25 @@ export function PublicNotesPage() {
 
   return (
     <MainLayoutWrapper>
-      <h1>{$t('public_notes')}</h1>
-
-      <div className={s.nav}>
-        <Link to="/personal">{$t('personal_notes')}</Link>
-        <Link to="/settings">{$t('settings')}</Link>
-      </div>
-
+      <Heading />
+      <NavBar />
       <MyCheckbox label={$t('only_fav')} value={favFilter} onChange={() => setFavFilter(v => !v)} />
-
       <NoteList notes={favFilter ? favMockNotes : mockNotes} favable />
     </MainLayoutWrapper>
+  )
+}
+
+function Heading() {
+  const {$t} = useLocale()
+  return <h1>{$t('public_notes')}</h1>
+}
+
+function NavBar() {
+  const {$t} = useLocale()
+  return (
+    <div className={s.nav}>
+      <Link to="/personal">{$t('personal_notes')}</Link>
+      <Link to="/settings">{$t('settings')}</Link>
+    </div>
   )
 }
