@@ -27,7 +27,7 @@ export function NoteItemActions({onEdit, onDelete, onFav, onMore}) {
 
       {onMore && (
         <MyButton flat onClick={onMore}>
-          Show more
+          {$t('show_more')}
           <i className="material-icons" style={{fontSize: '1rem'}}>
             open_in_new
           </i>

@@ -30,6 +30,19 @@ const ru = {
   edit: 'Изменить',
   delete: 'Удалить',
   no_data: 'Нет данных...',
+  only_fav: 'Только избранные:',
+  show_more: 'Открыть',
+  settingsPage: {
+    change_lang: 'Изменить язык',
+    change_pass: 'Изменить пароль',
+    new_pass: 'Новый пароль:',
+    confirm: 'Подтвердить',
+    error: 'Ошибка:',
+    error_msg: 'Не удалось обработать запрос',
+    log_out_from_the_acc: 'Выйти из аккаунта',
+    log_out: 'Выйти',
+  },
+  note: 'Заметка',
 }
 
 export default ru

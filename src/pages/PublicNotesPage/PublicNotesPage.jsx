@@ -22,7 +22,7 @@ export function PublicNotesPage() {
         <Link to="/settings">{$t('settings')}</Link>
       </div>
 
-      <MyCheckbox label="Only favorites" value={favFilter} onChange={() => setFavFilter(v => !v)} />
+      <MyCheckbox label={$t('only_fav')} value={favFilter} onChange={() => setFavFilter(v => !v)} />
 
       <NoteList notes={favFilter ? favMockNotes : mockNotes} favable />
     </MainLayoutWrapper>

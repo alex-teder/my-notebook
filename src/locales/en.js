@@ -30,6 +30,19 @@ const en = {
   edit: 'Edit',
   delete: 'Delete',
   no_data: 'No data...',
+  only_fav: 'Only favorites:',
+  show_more: 'Show more',
+  settingsPage: {
+    change_lang: 'Change language',
+    change_pass: 'Change password',
+    new_pass: 'New password:',
+    confirm: 'Confirm',
+    error: 'Error:',
+    error_msg: 'Could not process the request',
+    log_out_from_the_acc: 'Log out from the account',
+    log_out: 'Log out',
+  },
+  note: 'Note',
 }
 
 export default en

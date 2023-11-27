@@ -19,7 +19,7 @@ export function SettingsPage() {
   }
 
   const handleChangePassword = () => {
-    setPasswordError(new Error('Could not process the request'))
+    setPasswordError(new Error($t('settingsPage.error_msg')))
   }
 
   return (
@@ -32,33 +32,33 @@ export function SettingsPage() {
       </h1>
 
       <div className={s.setting}>
-        <b>Change language</b>
+        <b>{$t('settingsPage.change_lang')}</b>
         <LangChanger />
       </div>
 
       <div className={s.setting}>
-        <b>Change password</b>
+        <b>{$t('settingsPage.change_pass')}</b>
         <PasswordField
-          label="New password:"
+          label={$t('settingsPage.new_pass')}
           value={newPassword}
           onChange={e => setNewPassword(e.target.value)}
         />
 
         {passwordError && (
-          <MyAlert type="error" heading="Error:">
+          <MyAlert type="error" heading={$t('settingsPage.error')}>
             {passwordError.message}
           </MyAlert>
         )}
 
         <MyButton accent onClick={handleChangePassword}>
-          Confirm
+          {$t('settingsPage.confirm')}
         </MyButton>
       </div>
 
       <div className={s.setting}>
-        <b>Log out from the account</b>
+        <b>{$t('settingsPage.log_out_from_the_acc')}</b>
         <MyButton onClick={handleLogout}>
-          Log out
+          {$t('settingsPage.log_out')}
           <i className="material-icons">logout</i>
         </MyButton>
       </div>

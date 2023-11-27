@@ -24,7 +24,6 @@ export function NoteItem({note, isEditable, isFavable, isExpanded = false}) {
           onEdit={isEditable ? () => setIsEditDialog(true) : null}
           onDelete={isEditable ? () => setIsDeleteDialog(true) : null}
           onFav={isFavable ? handleFavClick : null}
-          isExpanded={isExpanded}
           onMore={isExpanded ? null : handleShowMore}
         />
       </MyCard>
