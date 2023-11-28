@@ -1,8 +1,8 @@
-import {useLocale} from '../../../../hooks/useLocale'
+import {useLocale} from '/src/hooks/useLocale'
 import {MyButton} from '/src/components/ui/MyButton'
 import s from './NoteItemActions.module.scss'
 
-export function NoteItemActions({onEdit, onDelete, onFav, isExpanded, onExpand}) {
+export function NoteItemActions({onEdit, onDelete, onFav, onMore}) {
   const {$t} = useLocale()
 
   return (
@@ -25,9 +25,14 @@ export function NoteItemActions({onEdit, onDelete, onFav, isExpanded, onExpand})
         </MyButton>
       )}
 
-      <MyButton flat ariaLabel={isExpanded ? 'collapse' : 'expand'} onClick={onExpand}>
-        <i className="material-icons">arrow_drop_{isExpanded ? 'up' : 'down'}</i>
-      </MyButton>
+      {onMore && (
+        <MyButton flat onClick={onMore}>
+          {$t('show_more')}
+          <i className="material-icons" style={{fontSize: '1rem'}}>
+            open_in_new
+          </i>
+        </MyButton>
+      )}
     </div>
   )
 }

@@ -2,14 +2,14 @@
   font-weight: bold;
 }
 
-.text {
+.textExpanded {
   padding-right: 1rem;
   margin-bottom: 1rem;
   font-size: 0.825rem;
 }
 
-.textHidden {
-  composes: text;
+.textCollapsed {
+  composes: textExpanded;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;

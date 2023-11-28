@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 import {MyCard} from '/src/components/ui/MyCard'
 import {NoteItemContent} from './NoteItemContent/NoteItemContent'
 import {NoteItemDetails} from './NoteItemDetails/NoteItemDetails'
@@ -6,12 +7,13 @@ import {NoteItemActions} from './NoteItemActions/NoteItemActions'
 import {ConfirmDeleteDialog} from '/src/components/ConfirmDeleteDialog'
 import {EditDialog} from '/src/components/EditDialog'
 
-export function NoteItem({note, isEditable, isFavable}) {
-  const [isExpanded, setIsExpanded] = useState(false)
+export function NoteItem({note, isEditable, isFavable, isExpanded = false}) {
+  const navigate = useNavigate()
   const [isDeleteDialog, setIsDeleteDialog] = useState(false)
   const [isEditDialog, setIsEditDialog] = useState(false)
 
   const handleFavClick = () => {}
+  const handleShowMore = () => navigate(`/note/${note.id}`)
 
   return (
     <>
@@ -22,8 +24,7 @@ export function NoteItem({note, isEditable, isFavable}) {
           onEdit={isEditable ? () => setIsEditDialog(true) : null}
           onDelete={isEditable ? () => setIsDeleteDialog(true) : null}
           onFav={isFavable ? handleFavClick : null}
-          isExpanded={isExpanded}
-          onExpand={() => setIsExpanded(v => !v)}
+          onMore={isExpanded ? null : handleShowMore}
         />
       </MyCard>
 

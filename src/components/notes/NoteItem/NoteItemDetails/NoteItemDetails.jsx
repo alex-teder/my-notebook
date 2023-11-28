@@ -1,5 +1,5 @@
+import {useLocale} from '/src/hooks/useLocale'
 import {MyChip} from '/src/components/ui/MyChip'
-import {useLocale} from '../../../../hooks/useLocale'
 import s from './NoteItemDetails.module.scss'
 
 export function NoteItemDetails({note}) {
