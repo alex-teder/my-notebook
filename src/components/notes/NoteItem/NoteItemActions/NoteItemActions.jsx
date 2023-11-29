@@ -2,7 +2,7 @@ import {useLocale} from '/src/hooks/useLocale'
 import {MyButton} from '/src/components/ui/MyButton'
 import s from './NoteItemActions.module.scss'
 
-export function NoteItemActions({onEdit, onDelete, onFav, onMore}) {
+export function NoteItemActions({onEdit, onDelete, isFav, onFav, onMore}) {
   const {$t} = useLocale()
 
   return (
@@ -20,8 +20,11 @@ export function NoteItemActions({onEdit, onDelete, onFav, onMore}) {
       )}
 
       {onFav && (
-        <MyButton flat ariaLabel="add to favorites" onClick={onFav}>
-          <i className="material-icons">star_outline</i>
+        <MyButton
+          flat
+          ariaLabel={isFav ? 'remove from favorites' : 'add to favorites'}
+          onClick={onFav}>
+          <i className="material-icons">{isFav ? 'star' : 'star_outline'}</i>
         </MyButton>
       )}
 

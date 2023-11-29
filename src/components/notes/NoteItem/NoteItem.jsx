@@ -6,13 +6,27 @@ import {NoteItemDetails} from './NoteItemDetails/NoteItemDetails'
 import {NoteItemActions} from './NoteItemActions/NoteItemActions'
 import {ConfirmDeleteDialog} from '/src/components/ConfirmDeleteDialog'
 import {EditDialog} from '/src/components/EditDialog'
+import {getItem, patchItem} from '/src/utils/storageUtils'
 
 export function NoteItem({note, isEditable, isFavable, isExpanded = false}) {
   const navigate = useNavigate()
   const [isDeleteDialog, setIsDeleteDialog] = useState(false)
   const [isEditDialog, setIsEditDialog] = useState(false)
+  const [isFav, setIsFav] = useState(
+    !!getItem('user').favorites && getItem('user').favorites.includes(note.id)
+  )
 
-  const handleFavClick = () => {}
+  const handleFavClick = () => {
+    const favs = getItem('user').favorites || []
+    if (favs.includes(note.id)) {
+      setIsFav(false)
+      patchItem('user', {favorites: favs.filter(item => item !== note.id)})
+    } else {
+      setIsFav(true)
+      patchItem('user', {favorites: favs.concat([note.id])})
+    }
+  }
+
   const handleShowMore = () => navigate(`/note/${note.id}`)
 
   return (
@@ -23,6 +37,7 @@ export function NoteItem({note, isEditable, isFavable, isExpanded = false}) {
         <NoteItemActions
           onEdit={isEditable ? () => setIsEditDialog(true) : null}
           onDelete={isEditable ? () => setIsDeleteDialog(true) : null}
+          isFav={isFav}
           onFav={isFavable ? handleFavClick : null}
           onMore={isExpanded ? null : handleShowMore}
         />
