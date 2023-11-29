@@ -1,3 +1,6 @@
+import {deleteItem} from '/src/utils/storageUtils'
+import {saveItem} from '/src/utils/storageUtils'
+
 export async function logIn({username, password}) {
   const URL = 'https://dull-pear-haddock-belt.cyclic.app/auth'
   const body = JSON.stringify({username, password})
@@ -14,13 +17,20 @@ export async function logIn({username, password}) {
   try {
     const res = await fetch(URL, options)
     if (res.ok) {
-      user = await res.json()
+      const data = await res.json()
+      user = {...data, username}
+      saveItem('user', user)
     } else {
       const errorMsg = await res.text()
       error = new Error(errorMsg)
     }
-    return {user, error}
-  } catch (error) {
-    return {user, error}
+  } catch (err) {
+    error = err
   }
+
+  return {user, error}
+}
+
+export function logOut() {
+  deleteItem('user')
 }

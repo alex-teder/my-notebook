@@ -35,20 +35,19 @@ function LogInForm() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isPending, setIsPending] = useState(false)
 
   const handleSubmit = async event => {
     event.preventDefault()
     setLoginError(null)
-    setIsLoading(true)
+    setIsPending(true)
 
     const {user, error} = await logIn({username, password})
-    setIsLoading(false)
+    setIsPending(false)
 
     if (error) {
       setLoginError(error)
     } else if (user) {
-      console.log('USER : ', user)
       navigate('/personal')
     }
   }
@@ -73,7 +72,7 @@ function LogInForm() {
         </MyAlert>
       )}
 
-      <MyButton accent type="submit" loading={isLoading}>
+      <MyButton accent type="submit" loading={isPending}>
         {$t('loginPage.log_in')}
       </MyButton>
     </form>

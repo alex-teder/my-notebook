@@ -6,6 +6,8 @@ import {MyButton} from '/src/components/ui/MyButton'
 import {MyAlert} from '/src/components/ui/MyAlert'
 import {LangChanger} from '/src/components/LangChanger'
 import {PasswordField} from '/src/components/PasswordField'
+import {logOut} from '/src/services/auth'
+import {getItem} from '/src/utils/storageUtils'
 import s from './SettingsPage.module.scss'
 
 export function SettingsPage() {
@@ -13,8 +15,10 @@ export function SettingsPage() {
   const navigate = useNavigate()
   const [newPassword, setNewPassword] = useState('')
   const [passwordError, setPasswordError] = useState(null)
+  const username = getItem('user').username
 
   const handleLogout = () => {
+    logOut()
     navigate('/login')
   }
 
@@ -30,6 +34,11 @@ export function SettingsPage() {
         </MyButton>
         {$t('settings')}
       </h1>
+
+      <div className={s.setting}>
+        <b>Logged in as: </b>
+        {username}
+      </div>
 
       <div className={s.setting}>
         <b>{$t('settingsPage.change_lang')}</b>
