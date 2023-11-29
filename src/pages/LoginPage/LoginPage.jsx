@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {useNavigate} from 'react-router-dom'
+// import {useNavigate} from 'react-router-dom'
 import {CenterLayoutWrapper} from '/src/components/layout/CenterLayoutWrapper'
 import {MyCard} from '/src/components/ui/MyCard'
 import {MyTextField} from '/src/components/ui/MyTextField'
@@ -8,6 +8,7 @@ import {MyAlert} from '/src/components/ui/MyAlert'
 import {useLocale} from '/src/hooks/useLocale'
 import {LangChanger} from '/src/components/LangChanger'
 import {PasswordField} from '../../components/PasswordField/PasswordField'
+import {logIn} from '/src/services/auth'
 import s from './LoginPage.module.scss'
 
 export function LoginPage() {
@@ -30,15 +31,16 @@ function Heading() {
 
 function LogInForm() {
   const {$t} = useLocale()
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loginError] = useState(null)
 
   const handleSubmit = event => {
     event.preventDefault()
+    logIn({username: email, password})
     // setLoginError(new Error($t('loginPage.user_not_found')))
-    navigate('/personal')
+    // navigate('/personal')
   }
 
   return (
