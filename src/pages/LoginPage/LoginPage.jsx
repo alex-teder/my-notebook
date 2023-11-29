@@ -35,10 +35,13 @@ function LogInForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loginError] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault()
-    logIn({username: email, password})
+    setIsLoading(true)
+    await logIn({username: email, password})
+    setIsLoading(false)
     // setLoginError(new Error($t('loginPage.user_not_found')))
     // navigate('/personal')
   }
@@ -59,7 +62,7 @@ function LogInForm() {
         </MyAlert>
       )}
 
-      <MyButton accent type="submit">
+      <MyButton accent type="submit" loading={isLoading}>
         {$t('loginPage.log_in')}
       </MyButton>
     </form>
