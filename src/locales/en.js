@@ -34,6 +34,7 @@ const en = {
   only_fav: 'Only favorites:',
   show_more: 'Show more',
   settingsPage: {
+    logged_in_as: 'You are logged in as:',
     change_lang: 'Change language',
     change_pass: 'Change password',
     new_pass: 'New password:',

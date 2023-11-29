@@ -34,6 +34,7 @@ const ru = {
   only_fav: 'Только избранные:',
   show_more: 'Открыть',
   settingsPage: {
+    logged_in_as: 'Вы вошли как:',
     change_lang: 'Изменить язык',
     change_pass: 'Изменить пароль',
     new_pass: 'Новый пароль:',

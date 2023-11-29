@@ -23,7 +23,7 @@ export function NoteItem({note, isEditable, isFavable, isExpanded = false}) {
       patchItem('user', {favorites: favs.filter(item => item !== note.id)})
     } else {
       setIsFav(true)
-      patchItem('user', {favorites: favs.concat([note.id])})
+      patchItem('user', {favorites: favs.concat(note.id)})
     }
   }
 

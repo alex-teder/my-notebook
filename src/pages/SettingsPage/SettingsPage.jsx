@@ -15,7 +15,8 @@ export function SettingsPage() {
   const navigate = useNavigate()
   const [newPassword, setNewPassword] = useState('')
   const [passwordError, setPasswordError] = useState(null)
-  const username = getItem('user').username
+
+  const username = getItem('user') && getItem('user').username
 
   const handleLogout = () => {
     logOut()
@@ -36,7 +37,7 @@ export function SettingsPage() {
       </h1>
 
       <div className={s.setting}>
-        <b>Logged in as: </b>
+        <b>{$t('settingsPage.logged_in_as')}</b>
         {username}
       </div>
 
