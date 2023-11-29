@@ -1,5 +1,5 @@
 import {useState} from 'react'
-// import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import {CenterLayoutWrapper} from '/src/components/layout/CenterLayoutWrapper'
 import {MyCard} from '/src/components/ui/MyCard'
 import {MyTextField} from '/src/components/ui/MyTextField'
@@ -31,24 +31,35 @@ function Heading() {
 
 function LogInForm() {
   const {$t} = useLocale()
-  // const navigate = useNavigate()
-  const [email, setEmail] = useState('')
+  const navigate = useNavigate()
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [loginError] = useState(null)
+  const [loginError, setLoginError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async event => {
     event.preventDefault()
+    setLoginError(null)
     setIsLoading(true)
-    await logIn({username: email, password})
+
+    const {user, error} = await logIn({username, password})
     setIsLoading(false)
-    // setLoginError(new Error($t('loginPage.user_not_found')))
-    // navigate('/personal')
+
+    if (error) {
+      setLoginError(error)
+    } else if (user) {
+      console.log('USER : ', user)
+      navigate('/personal')
+    }
   }
 
   return (
     <form className={s.form} onSubmit={handleSubmit}>
-      <MyTextField label="Email:" value={email} onChange={e => setEmail(e.target.value)} />
+      <MyTextField
+        label={$t('loginPage.username')}
+        value={username}
+        onChange={e => setUsername(e.target.value)}
+      />
 
       <PasswordField
         label={$t('loginPage.password')}

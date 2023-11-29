@@ -8,13 +8,19 @@ export async function logIn({username, password}) {
     redirect: 'follow',
   }
 
-  const res = await fetch(URL, options)
-  console.log(res)
-  if (res.ok) {
-    const data = await res.json()
-    console.log(data)
-  } else {
-    const err = await res.text()
-    console.log(err)
+  let user = null
+  let error = null
+
+  try {
+    const res = await fetch(URL, options)
+    if (res.ok) {
+      user = await res.json()
+    } else {
+      const errorMsg = await res.text()
+      error = new Error(errorMsg)
+    }
+    return {user, error}
+  } catch (error) {
+    return {user, error}
   }
 }

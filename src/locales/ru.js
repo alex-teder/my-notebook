@@ -1,6 +1,7 @@
 const ru = {
   loginPage: {
     log_in: 'Войти',
+    username: 'Имя пользователя:',
     password: 'Пароль:',
     error: 'Ошибка:',
     user_not_found: 'Пользователь не найден',
