@@ -7,7 +7,7 @@ import {MyButton} from '/src/components/ui/MyButton'
 import {MyAlert} from '/src/components/ui/MyAlert'
 import {useLocale} from '/src/hooks/useLocale'
 import {LangChanger} from '/src/components/LangChanger'
-import {PasswordField} from '../../components/PasswordField/PasswordField'
+import {PasswordField} from '/src/components/PasswordField'
 import {logIn} from '/src/services/auth'
 import s from './LoginPage.module.scss'
 
