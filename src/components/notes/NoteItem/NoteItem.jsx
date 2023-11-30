@@ -6,26 +6,13 @@ import {NoteItemDetails} from './NoteItemDetails'
 import {NoteItemActions} from './NoteItemActions'
 import {ConfirmDeleteDialog} from '/src/components/ConfirmDeleteDialog'
 import {EditDialog} from '/src/components/EditDialog'
-import {getItem, patchItem} from '/src/utils/storageUtils'
+import {useFavorite} from '/src/hooks/useFavorite'
 
 export function NoteItem({note, isEditable, isFavable, isExpanded = false}) {
   const navigate = useNavigate()
+  const {isFav, toggleFav} = useFavorite(note.id)
   const [isDeleteDialog, setIsDeleteDialog] = useState(false)
   const [isEditDialog, setIsEditDialog] = useState(false)
-  const [isFav, setIsFav] = useState(
-    !!getItem('user').favorites && getItem('user').favorites.includes(note.id)
-  )
-
-  const handleFavClick = () => {
-    const favs = getItem('user').favorites || []
-    if (favs.includes(note.id)) {
-      setIsFav(false)
-      patchItem('user', {favorites: favs.filter(item => item !== note.id)})
-    } else {
-      setIsFav(true)
-      patchItem('user', {favorites: favs.concat(note.id)})
-    }
-  }
 
   const handleShowMore = () => navigate(`/note/${note.id}`)
 
@@ -38,7 +25,7 @@ export function NoteItem({note, isEditable, isFavable, isExpanded = false}) {
           onEdit={isEditable ? () => setIsEditDialog(true) : null}
           onDelete={isEditable ? () => setIsDeleteDialog(true) : null}
           isFav={isFav}
-          onFav={isFavable ? handleFavClick : null}
+          onFav={isFavable ? toggleFav : null}
           onMore={isExpanded ? null : handleShowMore}
         />
       </MyCard>

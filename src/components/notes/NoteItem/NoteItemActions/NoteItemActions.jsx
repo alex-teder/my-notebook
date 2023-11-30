@@ -24,7 +24,9 @@ export function NoteItemActions({onEdit, onDelete, isFav, onFav, onMore}) {
           flat
           ariaLabel={isFav ? 'remove from favorites' : 'add to favorites'}
           onClick={onFav}>
-          <i className="material-icons">{isFav ? 'star' : 'star_outline'}</i>
+          <i className="material-icons" style={{color: isFav ? 'orange' : 'black'}}>
+            {isFav ? 'star' : 'star_outline'}
+          </i>
         </MyButton>
       )}
 
