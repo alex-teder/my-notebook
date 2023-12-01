@@ -1,3 +1,4 @@
+import {MySpinner} from '/src/components/ui/MySpinner'
 import {
   button as buttonStyle,
   flat as flatStyle,
@@ -11,6 +12,7 @@ export function MyButton({
   type = 'button',
   ariaLabel = undefined,
   disabled = false,
+  loading = false,
   onClick,
 }) {
   let className = buttonStyle
@@ -24,7 +26,7 @@ export function MyButton({
       aria-label={ariaLabel}
       disabled={disabled}
       onClick={onClick}>
-      {children}
+      {loading ? <MySpinner /> : children}
     </button>
   )
 }

@@ -1,6 +1,7 @@
 const en = {
   loginPage: {
     log_in: 'Log in',
+    username: 'Username:',
     password: 'Password:',
     error: 'Error:',
     user_not_found: 'User not found',
@@ -33,6 +34,7 @@ const en = {
   only_fav: 'Only favorites:',
   show_more: 'Show more',
   settingsPage: {
+    logged_in_as: 'You are logged in as:',
     change_lang: 'Change language',
     change_pass: 'Change password',
     new_pass: 'New password:',

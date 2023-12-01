@@ -2,7 +2,7 @@ import {useParams} from 'react-router-dom'
 import {useLocale} from '/src/hooks/useLocale'
 import {MainLayoutWrapper} from '/src/components/layout/MainLayoutWrapper'
 import {MyButton} from '/src/components/ui/MyButton'
-import {NoteItem} from '/src/components/notes/NoteItem/NoteItem'
+import {NoteItem} from '/src/components/notes/NoteItem'
 import {mockNotes} from '/src/utils/mockNotes'
 import s from './SingleNotePage.module.scss'
 

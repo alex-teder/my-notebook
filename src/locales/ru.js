@@ -1,6 +1,7 @@
 const ru = {
   loginPage: {
     log_in: 'Войти',
+    username: 'Имя пользователя:',
     password: 'Пароль:',
     error: 'Ошибка:',
     user_not_found: 'Пользователь не найден',
@@ -33,6 +34,7 @@ const ru = {
   only_fav: 'Только избранные:',
   show_more: 'Открыть',
   settingsPage: {
+    logged_in_as: 'Вы вошли как:',
     change_lang: 'Изменить язык',
     change_pass: 'Изменить пароль',
     new_pass: 'Новый пароль:',

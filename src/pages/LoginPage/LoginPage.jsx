@@ -7,7 +7,8 @@ import {MyButton} from '/src/components/ui/MyButton'
 import {MyAlert} from '/src/components/ui/MyAlert'
 import {useLocale} from '/src/hooks/useLocale'
 import {LangChanger} from '/src/components/LangChanger'
-import {PasswordField} from '../../components/PasswordField/PasswordField'
+import {PasswordField} from '/src/components/PasswordField'
+import {logIn} from '/src/services/auth'
 import s from './LoginPage.module.scss'
 
 export function LoginPage() {
@@ -31,19 +32,33 @@ function Heading() {
 function LogInForm() {
   const {$t} = useLocale()
   const navigate = useNavigate()
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [loginError] = useState(null)
+  const [loginError, setLoginError] = useState(null)
+  const [isPending, setIsPending] = useState(false)
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault()
-    // setLoginError(new Error($t('loginPage.user_not_found')))
-    navigate('/personal')
+    setLoginError(null)
+    setIsPending(true)
+
+    const {user, error} = await logIn({username, password})
+    setIsPending(false)
+
+    if (error) {
+      setLoginError(error)
+    } else if (user) {
+      navigate('/personal')
+    }
   }
 
   return (
     <form className={s.form} onSubmit={handleSubmit}>
-      <MyTextField label="Email:" value={email} onChange={e => setEmail(e.target.value)} />
+      <MyTextField
+        label={$t('loginPage.username')}
+        value={username}
+        onChange={e => setUsername(e.target.value)}
+      />
 
       <PasswordField
         label={$t('loginPage.password')}
@@ -57,7 +72,7 @@ function LogInForm() {
         </MyAlert>
       )}
 
-      <MyButton accent type="submit">
+      <MyButton accent type="submit" loading={isPending}>
         {$t('loginPage.log_in')}
       </MyButton>
     </form>
