@@ -4,7 +4,7 @@ import {MyCard} from '/src/components/ui/MyCard'
 import {MyButton} from '/src/components/ui/MyButton'
 import s from './ConfirmDeleteDialog.module.scss'
 
-export function ConfirmDeleteDialog({note, close}) {
+export function ConfirmDeleteDialog({note, close, confirm}) {
   const {$t} = useLocale()
 
   return (
@@ -14,7 +14,9 @@ export function ConfirmDeleteDialog({note, close}) {
         <p className={s.noteTitle}>{note.title}</p>
         <div className={s.actions}>
           <MyButton onClick={close}>{$t('deleteDialog.cancel')}</MyButton>
-          <MyButton accent>{$t('deleteDialog.confirm')}</MyButton>
+          <MyButton onClick={confirm} accent>
+            {$t('deleteDialog.confirm')}
+          </MyButton>
         </div>
       </MyCard>
     </MyDialog>

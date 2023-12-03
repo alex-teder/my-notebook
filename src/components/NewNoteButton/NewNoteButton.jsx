@@ -1,12 +1,20 @@
 import {useState} from 'react'
+import {useDispatch} from 'react-redux'
 import {useLocale} from '/src/hooks/useLocale'
+import {createNoteActionCreator} from '/src/store/notes'
 import {MyButton} from '/src/components/ui/MyButton'
 import {EditDialog} from '/src/components/EditDialog'
 import s from './NewNoteButton.module.scss'
 
 export function NewNoteButton() {
+  const dispatch = useDispatch()
   const {$t} = useLocale()
   const [isEditDialog, setIsEditDialog] = useState(false)
+
+  const handleCreate = newNote => {
+    dispatch(createNoteActionCreator(newNote))
+    setIsEditDialog(false)
+  }
 
   return (
     <div className={s.container}>
@@ -15,7 +23,7 @@ export function NewNoteButton() {
         <i className="material-icons">add</i>
       </MyButton>
 
-      {isEditDialog && <EditDialog close={() => setIsEditDialog(false)} />}
+      {isEditDialog && <EditDialog close={() => setIsEditDialog(false)} confirm={handleCreate} />}
     </div>
   )
 }

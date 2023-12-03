@@ -1,16 +1,16 @@
+import {useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import {useLocale} from '/src/hooks/useLocale'
 import {MainLayoutWrapper} from '/src/components/layout/MainLayoutWrapper'
 import {MyButton} from '/src/components/ui/MyButton'
 import {NoteItem} from '/src/components/notes/NoteItem'
-import {mockNotes} from '/src/utils/mockNotes'
 import s from './SingleNotePage.module.scss'
 
 export function SingleNotePage() {
   const {$t} = useLocale()
-
   const {noteId} = useParams()
-  const mockNote = mockNotes.find(item => item.id.toString() === noteId)
+  const notes = useSelector(state => state.notes)
+  const note = notes.find(({id}) => String(id) == noteId)
 
   return (
     <MainLayoutWrapper>
@@ -21,7 +21,7 @@ export function SingleNotePage() {
         {$t('note')}
       </h1>
 
-      <NoteItem note={mockNote} isExpanded />
+      <NoteItem note={note} isExpanded />
     </MainLayoutWrapper>
   )
 }

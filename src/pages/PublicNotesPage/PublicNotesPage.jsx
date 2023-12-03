@@ -1,18 +1,18 @@
 import {useState} from 'react'
 import {Link} from 'react-router-dom'
+import {useSelector} from 'react-redux'
 import {useLocale} from '/src/hooks/useLocale'
 import {MyCheckbox} from '/src/components/ui/MyCheckbox'
 import {NoteList} from '/src/components/notes/NoteList'
 import {MainLayoutWrapper} from '/src/components/layout/MainLayoutWrapper'
-import {mockNotes} from '/src/utils/mockNotes'
 import {getItem} from '/src/utils/storageUtils'
 import s from './PublicNotesPage.module.scss'
 
 export function PublicNotesPage() {
   const {$t} = useLocale()
+  const notes = useSelector(state => state.notes)
   const [favFilter, setFavFilter] = useState(false)
-
-  const filteredNotes = mockNotes.filter(
+  const filteredNotes = notes.filter(
     note => getItem('user').favorites && getItem('user').favorites.includes(note.id)
   )
 
@@ -21,7 +21,7 @@ export function PublicNotesPage() {
       <Heading />
       <NavBar />
       <MyCheckbox label={$t('only_fav')} value={favFilter} onChange={() => setFavFilter(v => !v)} />
-      <NoteList notes={favFilter ? filteredNotes : mockNotes} favable />
+      <NoteList notes={favFilter ? filteredNotes : notes} favable />
     </MainLayoutWrapper>
   )
 }

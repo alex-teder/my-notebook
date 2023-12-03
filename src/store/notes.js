@@ -24,23 +24,17 @@ export const deleteNoteActionCreator = noteToDelete => ({
 export const notesReducer = (state = initialState, action) => {
   switch (action.type) {
     case NOTES_ACTIONS.createNote:
-      return {
-        ...state,
-        notes: [...state.notes, action.payload],
-      }
+      return [...state, action.payload]
+
     case NOTES_ACTIONS.updateNote:
-      return {
-        ...state,
-        notes: state.notes.map(note => {
-          if (note.id === action.payload.id) return action.payload
-          return note
-        }),
-      }
+      return state.map(note => {
+        if (note.id === action.payload.id) return action.payload
+        return note
+      })
+
     case NOTES_ACTIONS.deleteNote:
-      return {
-        ...state,
-        notes: state.notes.filter(({id}) => id !== action.payload.id),
-      }
+      return state.filter(({id}) => id !== action.payload.id)
+
     default:
       return state
   }

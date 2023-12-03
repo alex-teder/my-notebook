@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import {v4 as uuid} from 'uuid'
 import {useLocale} from '/src/hooks/useLocale'
 import {MyDialog} from '/src/components/ui/MyDialog'
 import {MyCard} from '/src/components/ui/MyCard'
@@ -14,7 +15,7 @@ const EMPTY_NOTE = {
   text: '',
   tags: [],
   color: '#808080',
-  owner: '',
+  owner: 'DEFAULT_OWNER',
   isPublic: false,
 }
 
@@ -29,7 +30,7 @@ function Heading({noteId}) {
   )
 }
 
-export function EditDialog({note = EMPTY_NOTE, close}) {
+export function EditDialog({note = EMPTY_NOTE, close, confirm}) {
   const {$t} = useLocale()
   const [title, setTitle] = useState(note.title)
   const [text, setText] = useState(note.text)
@@ -41,6 +42,15 @@ export function EditDialog({note = EMPTY_NOTE, close}) {
 
   const handleSubmit = e => {
     e.preventDefault()
+    confirm({
+      id: note.id || uuid(),
+      title,
+      text,
+      tags: tagsStr ? tagsStr.split(', ') : [],
+      color,
+      isPublic,
+      owner: note.owner,
+    })
   }
 
   return (
