@@ -10,7 +10,7 @@ import s from './PublicNotesPage.module.scss'
 
 export function PublicNotesPage() {
   const {$t} = useLocale()
-  const notes = useSelector(state => state.notes)
+  const notes = useSelector(state => state.publicNotes)
   const [favFilter, setFavFilter] = useState(false)
   const filteredNotes = notes.filter(
     note => getItem('user').favorites && getItem('user').favorites.includes(note.id)

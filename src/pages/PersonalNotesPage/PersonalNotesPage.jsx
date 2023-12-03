@@ -7,7 +7,7 @@ import {NewNoteButton} from '/src/components/NewNoteButton'
 import s from './PersonalNotesPage.module.scss'
 
 export function PersonalNotesPage() {
-  const notes = useSelector(state => state.notes)
+  const notes = useSelector(state => state.personalNotes)
 
   return (
     <MainLayoutWrapper>

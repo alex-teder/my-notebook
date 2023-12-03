@@ -1,8 +1,10 @@
 import {combineReducers, createStore} from 'redux'
-import {notesReducer} from './notes'
+import {personalNotesReducer} from './personalNotes'
+import {publicNotesReducer} from './publicNotes'
 
 const rootReducer = combineReducers({
-  notes: notesReducer,
+  personalNotes: personalNotesReducer,
+  publicNotes: publicNotesReducer,
 })
 
 export const store = createStore(rootReducer)

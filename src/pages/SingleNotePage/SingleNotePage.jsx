@@ -1,11 +1,11 @@
 import {useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom'
 import {useLocale} from '/src/hooks/useLocale'
+import {getSingleNote} from '/src/services/getSingleNote'
 import {MainLayoutWrapper} from '/src/components/layout/MainLayoutWrapper'
 import {MyButton} from '/src/components/ui/MyButton'
 import {NoteItem} from '/src/components/notes/NoteItem'
 import s from './SingleNotePage.module.scss'
-import {getSingleNote} from '../../services/getSingleNote'
 
 export function SingleNotePage() {
   const {$t} = useLocale()
