@@ -1,16 +1,25 @@
-import {useSelector} from 'react-redux'
+import {useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom'
 import {useLocale} from '/src/hooks/useLocale'
 import {MainLayoutWrapper} from '/src/components/layout/MainLayoutWrapper'
 import {MyButton} from '/src/components/ui/MyButton'
 import {NoteItem} from '/src/components/notes/NoteItem'
 import s from './SingleNotePage.module.scss'
+import {getSingleNote} from '../../services/getSingleNote'
 
 export function SingleNotePage() {
   const {$t} = useLocale()
   const {noteId} = useParams()
-  const notes = useSelector(state => state.notes)
-  const note = notes.find(({id}) => String(id) == noteId)
+  const [note, setNote] = useState(null)
+
+  useEffect(() => {
+    async function getNote(id) {
+      const {data} = await getSingleNote(id)
+      setNote(data)
+    }
+
+    getNote(noteId)
+  }, [noteId])
 
   return (
     <MainLayoutWrapper>
@@ -21,7 +30,7 @@ export function SingleNotePage() {
         {$t('note')}
       </h1>
 
-      <NoteItem note={note} isExpanded />
+      {note && <NoteItem note={note} isExpanded />}
     </MainLayoutWrapper>
   )
 }
