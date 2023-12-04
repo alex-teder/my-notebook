@@ -4,7 +4,6 @@ import {USER_ACTIONS} from '../store/user'
 export function useFavorite(id) {
   const dispatch = useDispatch()
   const favorites = useSelector(state => state.user.favorites)
-  console.log(favorites)
   const isFav = favorites.includes(id)
 
   const toggleFav = () => {
