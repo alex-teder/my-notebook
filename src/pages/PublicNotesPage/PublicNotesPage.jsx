@@ -6,6 +6,7 @@ import {MyCheckbox} from '/src/components/ui/MyCheckbox'
 import {NoteList} from '/src/components/notes/NoteList'
 import {MainLayoutWrapper} from '/src/components/layout/MainLayoutWrapper'
 import {getItem} from '/src/utils/storageUtils'
+import {PATHS} from '/src/services/router'
 import s from './PublicNotesPage.module.scss'
 
 export function PublicNotesPage() {
@@ -35,8 +36,8 @@ function NavBar() {
   const {$t} = useLocale()
   return (
     <div className={s.nav}>
-      <Link to="/personal">{$t('personal_notes')}</Link>
-      <Link to="/settings">{$t('settings')}</Link>
+      <Link to={PATHS.PERSONAL}>{$t('personal_notes')}</Link>
+      <Link to={PATHS.SETTINGS}>{$t('settings')}</Link>
     </div>
   )
 }

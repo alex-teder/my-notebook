@@ -4,6 +4,7 @@ import {useLocale} from '/src/hooks/useLocale'
 import {NoteList} from '/src/components/notes/NoteList'
 import {MainLayoutWrapper} from '/src/components/layout/MainLayoutWrapper'
 import {NewNoteButton} from '/src/components/NewNoteButton'
+import {PATHS} from '/src/services/router'
 import s from './PersonalNotesPage.module.scss'
 
 export function PersonalNotesPage() {
@@ -28,8 +29,8 @@ function NavBar() {
   const {$t} = useLocale()
   return (
     <div className={s.nav}>
-      <Link to="/public">{$t('public_notes')}</Link>
-      <Link to="/settings">{$t('settings')}</Link>
+      <Link to={PATHS.PUBLIC}>{$t('public_notes')}</Link>
+      <Link to={PATHS.SETTINGS}>{$t('settings')}</Link>
     </div>
   )
 }

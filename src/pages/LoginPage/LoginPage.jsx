@@ -9,8 +9,9 @@ import {MyAlert} from '/src/components/ui/MyAlert'
 import {useLocale} from '/src/hooks/useLocale'
 import {LangChanger} from '/src/components/LangChanger'
 import {PasswordField} from '/src/components/PasswordField'
-import {logIn} from '/src/services/auth'
+import {sendLogInRequest} from '/src/services/auth'
 import {USER_ACTIONS} from '/src/store/user'
+import {PATHS} from '/src/services/router'
 import s from './LoginPage.module.scss'
 
 export function LoginPage() {
@@ -45,17 +46,17 @@ function LogInForm() {
     setLoginError(null)
     setIsPending(true)
 
-    const {user, error} = await logIn({username, password})
+    const {data, error} = await sendLogInRequest({username, password})
     setIsPending(false)
 
     if (error) {
       setLoginError(error)
-    } else if (user) {
+    } else if (data) {
       dispatch({
         type: USER_ACTIONS.setNewUser,
-        payload: {token: user.token, username: user.username},
+        payload: {token: data.token, username},
       })
-      navigate('/personal')
+      navigate(PATHS.PERSONAL)
     }
   }
 

@@ -9,6 +9,7 @@ import {ConfirmDeleteDialog} from '/src/components/ConfirmDeleteDialog'
 import {EditDialog} from '/src/components/EditDialog'
 import {useFavorite} from '/src/hooks/useFavorite'
 import {deleteNoteActionCreator, updateNoteActionCreator} from '/src/store/personalNotes'
+import {PATHS} from '/src/services/router'
 
 export function NoteItem({note, isEditable, isFavable, isExpanded = false}) {
   const navigate = useNavigate()
@@ -17,7 +18,7 @@ export function NoteItem({note, isEditable, isFavable, isExpanded = false}) {
   const [isDeleteDialog, setIsDeleteDialog] = useState(false)
   const [isEditDialog, setIsEditDialog] = useState(false)
 
-  const handleShowMore = () => navigate(`/note/${note.id}`)
+  const handleShowMore = () => navigate(`${PATHS.NOTE}/${note.id}`)
 
   const handleDelete = () => {
     dispatch(deleteNoteActionCreator(note))

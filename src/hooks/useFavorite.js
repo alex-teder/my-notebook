@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux'
-import {USER_ACTIONS} from '../store/user'
+import {USER_ACTIONS} from '/src/store/user'
 
 export function useFavorite(id) {
   const dispatch = useDispatch()
