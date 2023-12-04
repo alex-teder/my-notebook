@@ -1,19 +1,17 @@
-import {useState} from 'react'
-import {getItem, patchItem} from '/src/utils/storageUtils'
+import {useDispatch, useSelector} from 'react-redux'
+import {USER_ACTIONS} from '../store/user'
 
 export function useFavorite(id) {
-  const [isFav, setIsFav] = useState(
-    !!getItem('user').favorites && getItem('user').favorites.includes(id)
-  )
+  const dispatch = useDispatch()
+  const favorites = useSelector(state => state.user.favorites)
+  console.log(favorites)
+  const isFav = favorites.includes(id)
 
   const toggleFav = () => {
-    const favs = getItem('user').favorites || []
-    if (favs.includes(id)) {
-      setIsFav(false)
-      patchItem('user', {favorites: favs.filter(item => item !== id)})
+    if (favorites.includes(id)) {
+      dispatch({type: USER_ACTIONS.removeNoteFromFavs, payload: id})
     } else {
-      setIsFav(true)
-      patchItem('user', {favorites: favs.concat(id)})
+      dispatch({type: USER_ACTIONS.addNoteToFavs, payload: id})
     }
   }
 
