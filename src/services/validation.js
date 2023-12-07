@@ -26,3 +26,7 @@ export const isValidNote = note => {
 
   return true
 }
+
+export const isValidPassword = pw => {
+  return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(pw)
+}

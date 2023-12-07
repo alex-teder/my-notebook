@@ -9,6 +9,8 @@ import {LangChanger} from '/src/components/LangChanger'
 import {PasswordField} from '/src/components/PasswordField'
 import {removeUser} from '/src/store/user'
 import {PATHS} from '/src/services/router'
+import {apiChangePassword} from '/src/services/api'
+import {isValidPassword} from '/src/services/validation'
 import s from './SettingsPage.module.scss'
 
 export function SettingsPage() {
@@ -17,16 +19,32 @@ export function SettingsPage() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
   const username = user ? user.username : null
+  const token = useSelector(state => state.user.token)
   const [newPassword, setNewPassword] = useState('')
   const [passwordError, setPasswordError] = useState(null)
+  const [passwordSuccessMsg, setPasswordSuccessMsg] = useState(null)
+  const [isPasswordButtonLoading, setIsPasswordButtonLoading] = useState(false)
 
   const handleLogout = () => {
     dispatch(removeUser())
     navigate(PATHS.LOGIN)
   }
 
-  const handleChangePassword = () => {
-    setPasswordError(new Error($t('settingsPage.error_msg')))
+  const handleChangePassword = async newPw => {
+    setPasswordError(null)
+    setPasswordSuccessMsg(null)
+    setIsPasswordButtonLoading(true)
+    if (!isValidPassword(newPw)) {
+      setPasswordError(new Error('Validation failed'))
+      return
+    }
+    const {data, error} = await apiChangePassword(newPw, token)
+    if (error) {
+      setPasswordError(new Error(error))
+    } else if (data) {
+      setPasswordSuccessMsg(data)
+    }
+    setIsPasswordButtonLoading(false)
   }
 
   return (
@@ -64,7 +82,12 @@ export function SettingsPage() {
           </MyAlert>
         )}
 
-        <MyButton accent onClick={handleChangePassword}>
+        {passwordSuccessMsg && <MyAlert type="success">{passwordSuccessMsg}</MyAlert>}
+
+        <MyButton
+          accent
+          loading={isPasswordButtonLoading}
+          onClick={() => handleChangePassword(newPassword)}>
           {$t('settingsPage.confirm')}
         </MyButton>
       </div>

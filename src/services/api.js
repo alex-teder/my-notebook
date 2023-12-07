@@ -74,4 +74,14 @@ export async function apiGetSingleNote(id, token) {
   return await genericFetch(URL, options, 'json')
 }
 
-export async function apiChangePassword() {}
+export async function apiChangePassword(newPassword, token) {
+  console.log('NEW PASS:', newPassword)
+  console.log('TOKEN:', token)
+  const URL = BASE_URL + 'auth'
+  const options = {
+    method: 'PUT',
+    headers: {Authorization: `Bearer: ${token}`, 'Content-Type': 'application/json'},
+    body: JSON.stringify({password: newPassword}),
+  }
+  return await genericFetch(URL, options, 'text')
+}
