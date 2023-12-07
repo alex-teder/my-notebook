@@ -1,4 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
+import {apiFetchPublicNotes} from '../services/api'
 
 const STATUS_ENUM = {
   IDLE: 'idle',
@@ -14,13 +15,12 @@ const initialState = {
 }
 
 export const fetchPublicNotes = createAsyncThunk('publicNotes/fetchPublicNotes', async token => {
-  const URL = 'https://dull-pear-haddock-belt.cyclic.app/notes?type=public'
-  const response = await fetch(URL, {
-    method: 'GET',
-    headers: {Authorization: `Bearer: ${token}`},
-  })
-  const data = await response.json()
-  return data
+  const {data, error} = await apiFetchPublicNotes(token)
+  if (error) {
+    throw new Error(error)
+  } else if (data) {
+    return data
+  }
 })
 
 const publicNotesSlice = createSlice({

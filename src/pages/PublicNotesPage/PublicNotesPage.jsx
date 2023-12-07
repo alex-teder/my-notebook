@@ -17,7 +17,7 @@ export function PublicNotesPage() {
   const status = useSelector(state => state.publicNotes.status)
   const token = useSelector(state => state.user.token)
   const [favFilter, setFavFilter] = useState(false)
-  const filteredNotes = notes.filter(
+  const filteredNotes = (notes || []).filter(
     note => getItem('user').favorites && getItem('user').favorites.includes(note.id)
   )
 

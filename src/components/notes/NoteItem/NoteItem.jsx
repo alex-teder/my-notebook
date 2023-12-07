@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {MyCard} from '/src/components/ui/MyCard'
 import {NoteItemContent} from './NoteItemContent'
 import {NoteItemDetails} from './NoteItemDetails'
@@ -14,6 +14,7 @@ import {PATHS} from '/src/services/router'
 export function NoteItem({note, isEditable, isFavable, isExpanded = false}) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const token = useSelector(state => state.user.token)
   const {isFav, toggleFav} = useFavorite(note.id)
   const [isDeleteDialog, setIsDeleteDialog] = useState(false)
   const [isEditDialog, setIsEditDialog] = useState(false)
@@ -21,7 +22,7 @@ export function NoteItem({note, isEditable, isFavable, isExpanded = false}) {
   const handleShowMore = () => navigate(`${PATHS.NOTE}/${note.id}`)
 
   const handleDelete = () => {
-    dispatch(deleteNote(note))
+    dispatch(deleteNote({token, id: note.id}))
     setIsDeleteDialog(false)
   }
   const handleEdit = updatedNote => {
