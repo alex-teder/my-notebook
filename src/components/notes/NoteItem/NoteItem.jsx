@@ -8,7 +8,7 @@ import {NoteItemActions} from './NoteItemActions'
 import {ConfirmDeleteDialog} from '/src/components/ConfirmDeleteDialog'
 import {EditDialog} from '/src/components/EditDialog'
 import {useFavorite} from '/src/hooks/useFavorite'
-import {deleteNoteActionCreator, updateNoteActionCreator} from '/src/store/personalNotes'
+import {deleteNote, updateNote} from '/src/store/personalNotes'
 import {PATHS} from '/src/services/router'
 
 export function NoteItem({note, isEditable, isFavable, isExpanded = false}) {
@@ -21,11 +21,11 @@ export function NoteItem({note, isEditable, isFavable, isExpanded = false}) {
   const handleShowMore = () => navigate(`${PATHS.NOTE}/${note.id}`)
 
   const handleDelete = () => {
-    dispatch(deleteNoteActionCreator(note))
+    dispatch(deleteNote(note))
     setIsDeleteDialog(false)
   }
   const handleEdit = updatedNote => {
-    dispatch(updateNoteActionCreator(updatedNote))
+    dispatch(updateNote(updatedNote))
     setIsEditDialog(false)
   }
 

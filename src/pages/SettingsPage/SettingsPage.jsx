@@ -7,7 +7,7 @@ import {MyButton} from '/src/components/ui/MyButton'
 import {MyAlert} from '/src/components/ui/MyAlert'
 import {LangChanger} from '/src/components/LangChanger'
 import {PasswordField} from '/src/components/PasswordField'
-import {USER_ACTIONS} from '/src/store/user'
+import {removeUser} from '/src/store/user'
 import {PATHS} from '/src/services/router'
 import s from './SettingsPage.module.scss'
 
@@ -21,7 +21,7 @@ export function SettingsPage() {
   const [passwordError, setPasswordError] = useState(null)
 
   const handleLogout = () => {
-    dispatch({type: USER_ACTIONS.removeUser})
+    dispatch(removeUser())
     navigate(PATHS.LOGIN)
   }
 
