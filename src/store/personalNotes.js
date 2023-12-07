@@ -1,4 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
+// import {isValidNote} from '/src/services/validation'
 
 const STATUS_ENUM = {
   IDLE: 'idle',
@@ -26,13 +27,28 @@ export const fetchPersonalNotes = createAsyncThunk(
   }
 )
 
+export const postNewNote = createAsyncThunk(
+  'personalNotes/postNewNote',
+  async ({token, newNote}) => {
+    const URL = 'https://dull-pear-haddock-belt.cyclic.app/notes'
+    const response = await fetch(URL, {
+      method: 'POST',
+
+      headers: {Authorization: `Bearer: ${token}`, 'Content-Type': 'application/json'},
+      body: JSON.stringify(newNote),
+    })
+    if (response.ok) {
+      return newNote
+    }
+    const error = await response.text()
+    throw new Error(error)
+  }
+)
+
 const personalNotesSlice = createSlice({
   name: 'personalNotes',
   initialState,
   reducers: {
-    createNote(state, action) {
-      state.push(action.payload)
-    },
     updateNote(state, action) {
       const index = state.findIndex(({id}) => id === action.payload.id)
       state[index] = action.payload
@@ -41,22 +57,28 @@ const personalNotesSlice = createSlice({
       const index = state.findIndex(({id}) => id === action.payload.id)
       state.splice(index, 1)
     },
-    extraReducers(builder) {
-      builder
-        .addCase(fetchPersonalNotes.pending, state => {
-          state.status = STATUS_ENUM.LOADING
-        })
-        .addCase(fetchPersonalNotes.fulfilled, (state, action) => {
-          state.status = STATUS_ENUM.SUCCEEDED
-          state.notes = action.payload
-        })
-        .addCase(fetchPersonalNotes.rejected, (state, action) => {
-          state.status = STATUS_ENUM.FAILED
-          state.error = action.error.message
-        })
-    },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchPersonalNotes.pending, state => {
+        state.status = STATUS_ENUM.LOADING
+      })
+      .addCase(fetchPersonalNotes.fulfilled, (state, action) => {
+        state.status = STATUS_ENUM.SUCCEEDED
+        state.notes = action.payload
+      })
+      .addCase(fetchPersonalNotes.rejected, (state, action) => {
+        state.status = STATUS_ENUM.FAILED
+        state.error = action.error.message
+      })
+      .addCase(postNewNote.fulfilled, (state, action) => {
+        state.notes.push(action.payload)
+      })
+      .addCase(postNewNote.rejected, (state, action) => {
+        state.error = action.payload
+      })
   },
 })
 
-export const {createNote, updateNote, deleteNote} = personalNotesSlice.actions
+export const {updateNote, deleteNote} = personalNotesSlice.actions
 export const personalNotesReducer = personalNotesSlice.reducer

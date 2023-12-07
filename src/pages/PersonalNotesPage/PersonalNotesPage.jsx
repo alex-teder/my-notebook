@@ -13,7 +13,7 @@ export function PersonalNotesPage() {
   const dispatch = useDispatch()
   const notes = useSelector(state => state.personalNotes.notes)
   const status = useSelector(state => state.personalNotes.status)
-  const token = useSelector(state => state.personalNotes.token)
+  const token = useSelector(state => state.user.token)
 
   useEffect(() => {
     if (status === 'idle') {

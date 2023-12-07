@@ -1,5 +1,4 @@
 import {useState} from 'react'
-import {v4 as uuid} from 'uuid'
 import {useLocale} from '/src/hooks/useLocale'
 import {MyDialog} from '/src/components/ui/MyDialog'
 import {MyCard} from '/src/components/ui/MyCard'
@@ -15,7 +14,6 @@ const EMPTY_NOTE = {
   text: '',
   tags: [],
   color: '#808080',
-  owner: 'DEFAULT_OWNER',
   isPublic: false,
 }
 
@@ -43,13 +41,12 @@ export function EditDialog({note = EMPTY_NOTE, close, confirm}) {
   const handleSubmit = e => {
     e.preventDefault()
     confirm({
-      id: note.id || uuid(),
+      // id: note.id || uuid(),
       title,
       text,
       tags: tagsStr ? tagsStr.split(', ') : [],
       color,
       isPublic,
-      owner: note.owner,
     })
   }
 
