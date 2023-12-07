@@ -6,47 +6,56 @@ import {SettingsPage} from '/src/pages/SettingsPage'
 import {SingleNotePage} from '/src/pages/SingleNotePage'
 import {getItem} from '/src/utils/storageUtils'
 
+export const PATHS = {
+  ROOT: '/',
+  LOGIN: '/login',
+  PERSONAL: '/personal',
+  PUBLIC: '/public',
+  SETTINGS: '/settings',
+  NOTE: '/note',
+}
+
 const checkUser = () => !!getItem('user')
 
 const requiresAuth = () => {
-  if (!checkUser()) return redirect('/login')
+  if (!checkUser()) return redirect(PATHS.LOGIN)
   return null
 }
 const requiresNoAuth = () => {
-  if (checkUser()) return redirect('/')
+  if (checkUser()) return redirect(PATHS.ROOT)
   return null
 }
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: PATHS.ROOT,
     loader() {
-      if (checkUser()) return redirect('/personal')
-      return redirect('/login')
+      if (checkUser()) return redirect(PATHS.PERSONAL)
+      return redirect(PATHS.LOGIN)
     },
   },
   {
-    path: '/login',
+    path: PATHS.LOGIN,
     element: <LoginPage />,
     loader: requiresNoAuth,
   },
   {
-    path: '/public',
+    path: PATHS.PUBLIC,
     element: <PublicNotesPage />,
     loader: requiresAuth,
   },
   {
-    path: '/personal',
+    path: PATHS.PERSONAL,
     element: <PersonalNotesPage />,
     loader: requiresAuth,
   },
   {
-    path: '/settings',
+    path: PATHS.SETTINGS,
     element: <SettingsPage />,
     loader: requiresAuth,
   },
   {
-    path: '/note/:noteId',
+    path: PATHS.NOTE + '/:noteId',
     element: <SingleNotePage />,
     loader: requiresAuth,
   },

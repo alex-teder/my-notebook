@@ -1,26 +1,28 @@
 import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {useDispatch, useSelector} from 'react-redux'
 import {useLocale} from '/src/hooks/useLocale'
 import {MainLayoutWrapper} from '/src/components/layout/MainLayoutWrapper'
 import {MyButton} from '/src/components/ui/MyButton'
 import {MyAlert} from '/src/components/ui/MyAlert'
 import {LangChanger} from '/src/components/LangChanger'
 import {PasswordField} from '/src/components/PasswordField'
-import {logOut} from '/src/services/auth'
-import {getItem} from '/src/utils/storageUtils'
+import {USER_ACTIONS} from '/src/store/user'
+import {PATHS} from '/src/services/router'
 import s from './SettingsPage.module.scss'
 
 export function SettingsPage() {
   const {$t} = useLocale()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
+  const username = user ? user.username : null
   const [newPassword, setNewPassword] = useState('')
   const [passwordError, setPasswordError] = useState(null)
 
-  const username = getItem('user') && getItem('user').username
-
   const handleLogout = () => {
-    logOut()
-    navigate('/login')
+    dispatch({type: USER_ACTIONS.removeUser})
+    navigate(PATHS.LOGIN)
   }
 
   const handleChangePassword = () => {
@@ -36,10 +38,12 @@ export function SettingsPage() {
         {$t('settings')}
       </h1>
 
-      <div className={s.setting}>
-        <b>{$t('settingsPage.logged_in_as')}</b>
-        {username}
-      </div>
+      {username && (
+        <div className={s.setting}>
+          <b>{$t('settingsPage.logged_in_as')}</b>
+          {username}
+        </div>
+      )}
 
       <div className={s.setting}>
         <b>{$t('settingsPage.change_lang')}</b>

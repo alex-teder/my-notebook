@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
 import {CenterLayoutWrapper} from '/src/components/layout/CenterLayoutWrapper'
 import {MyCard} from '/src/components/ui/MyCard'
 import {MyTextField} from '/src/components/ui/MyTextField'
@@ -8,7 +9,9 @@ import {MyAlert} from '/src/components/ui/MyAlert'
 import {useLocale} from '/src/hooks/useLocale'
 import {LangChanger} from '/src/components/LangChanger'
 import {PasswordField} from '/src/components/PasswordField'
-import {logIn} from '/src/services/auth'
+import {sendLogInRequest} from '/src/services/auth'
+import {USER_ACTIONS} from '/src/store/user'
+import {PATHS} from '/src/services/router'
 import s from './LoginPage.module.scss'
 
 export function LoginPage() {
@@ -32,6 +35,7 @@ function Heading() {
 function LogInForm() {
   const {$t} = useLocale()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState(null)
@@ -42,13 +46,17 @@ function LogInForm() {
     setLoginError(null)
     setIsPending(true)
 
-    const {user, error} = await logIn({username, password})
+    const {data, error} = await sendLogInRequest({username, password})
     setIsPending(false)
 
     if (error) {
       setLoginError(error)
-    } else if (user) {
-      navigate('/personal')
+    } else if (data) {
+      dispatch({
+        type: USER_ACTIONS.setNewUser,
+        payload: {token: data.token, username},
+      })
+      navigate(PATHS.PERSONAL)
     }
   }
 
