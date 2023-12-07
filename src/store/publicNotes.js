@@ -37,7 +37,7 @@ const publicNotesSlice = createSlice({
       })
       .addCase(fetchPublicNotes.rejected, (state, action) => {
         state.status = STATUS_ENUM.FAILED
-        state.error = action.error.message
+        console.error(action.error.message)
       })
   },
 })

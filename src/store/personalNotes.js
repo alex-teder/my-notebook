@@ -80,25 +80,28 @@ const personalNotesSlice = createSlice({
       })
       .addCase(fetchPersonalNotes.rejected, (state, action) => {
         state.status = STATUS_ENUM.FAILED
-        state.error = action.error.message
+        console.error(action.error.message)
       })
       .addCase(postNewNote.fulfilled, state => {
         state.status = STATUS_ENUM.IDLE
       })
-      .addCase(postNewNote.rejected, (_, action) => {
-        console.error(action.payload)
+      .addCase(postNewNote.rejected, (state, action) => {
+        state.status = STATUS_ENUM.FAILED
+        console.error(action.error.message)
       })
       .addCase(updateNote.fulfilled, state => {
         state.status = STATUS_ENUM.IDLE
       })
-      .addCase(updateNote.rejected, (_, action) => {
-        console.error(action.payload)
+      .addCase(updateNote.rejected, (state, action) => {
+        state.status = STATUS_ENUM.FAILED
+        console.error(action.error.message)
       })
       .addCase(deleteNote.fulfilled, state => {
         state.status = STATUS_ENUM.IDLE
       })
-      .addCase(deleteNote.rejected, (_, action) => {
-        console.error(action.payload)
+      .addCase(deleteNote.rejected, (state, action) => {
+        state.status = STATUS_ENUM.FAILED
+        console.error(action.error.message)
       })
   },
 })

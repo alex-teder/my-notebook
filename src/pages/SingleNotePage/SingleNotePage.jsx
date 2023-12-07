@@ -1,25 +1,31 @@
 import {useEffect, useState} from 'react'
+import {useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import {useLocale} from '/src/hooks/useLocale'
-import {getSingleNote} from '/src/services/getSingleNote'
 import {MainLayoutWrapper} from '/src/components/layout/MainLayoutWrapper'
 import {MyButton} from '/src/components/ui/MyButton'
 import {NoteItem} from '/src/components/notes/NoteItem'
+import {apiGetSingleNote} from '/src/services/api'
 import s from './SingleNotePage.module.scss'
 
 export function SingleNotePage() {
   const {$t} = useLocale()
   const {noteId} = useParams()
   const [note, setNote] = useState(null)
+  const token = useSelector(state => state.user.token)
 
   useEffect(() => {
     async function getNote(id) {
-      const {data} = await getSingleNote(id)
-      setNote(data)
+      const {data, error} = await apiGetSingleNote(id, token)
+      if (error) {
+        console.error(error)
+      } else if (data) {
+        setNote(data)
+      }
     }
 
     getNote(noteId)
-  }, [noteId])
+  }, [noteId, token])
 
   return (
     <MainLayoutWrapper>

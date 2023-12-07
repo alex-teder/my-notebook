@@ -64,3 +64,14 @@ export async function apiDeleteNote(id, token) {
   }
   return await genericFetch(URL, options, 'text')
 }
+
+export async function apiGetSingleNote(id, token) {
+  const URL = BASE_URL + `notes?id=${id}`
+  const options = {
+    method: 'GET',
+    headers: {Authorization: `Bearer: ${token}`},
+  }
+  return await genericFetch(URL, options, 'json')
+}
+
+export async function apiChangePassword() {}
