@@ -26,7 +26,7 @@ export function NoteItem({note, isEditable, isFavable, isExpanded = false}) {
     setIsDeleteDialog(false)
   }
   const handleEdit = updatedNote => {
-    dispatch(updateNote(updatedNote))
+    dispatch(updateNote({token, updatedNote, id: note.id}))
     setIsEditDialog(false)
   }
 

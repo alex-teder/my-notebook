@@ -46,6 +46,16 @@ export async function apiPostNewNote(newNote, token) {
   return await genericFetch(URL, options, 'text')
 }
 
+export async function apiUpdateNote(updatedNote, id, token) {
+  const URL = BASE_URL + `notes?id=${id}`
+  const options = {
+    method: 'PUT',
+    headers: {Authorization: `Bearer: ${token}`, 'Content-Type': 'application/json'},
+    body: JSON.stringify(updatedNote),
+  }
+  return await genericFetch(URL, options, 'text')
+}
+
 export async function apiDeleteNote(id, token) {
   const URL = BASE_URL + `notes?id=${id}`
   const options = {
