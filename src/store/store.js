@@ -1,20 +1,20 @@
-import {combineReducers, createStore} from 'redux'
+import {configureStore} from '@reduxjs/toolkit'
 import {personalNotesReducer} from './personalNotes'
 import {publicNotesReducer} from './publicNotes'
 import {userReducer} from './user'
 import {deleteItem, saveItem} from '/src/utils/storageUtils'
 
-const rootReducer = combineReducers({
-  personalNotes: personalNotesReducer,
-  publicNotes: publicNotesReducer,
-  user: userReducer,
+export const store = configureStore({
+  reducer: {
+    publicNotes: publicNotesReducer,
+    personalNotes: personalNotesReducer,
+    user: userReducer,
+  },
 })
-
-export const store = createStore(rootReducer)
 
 const updateLocalStorage = () => {
   const user = store.getState().user
-  if (user) {
+  if (user.username) {
     saveItem('user', user)
   } else {
     deleteItem('user')

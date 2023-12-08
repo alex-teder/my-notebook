@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux'
-import {USER_ACTIONS} from '/src/store/user'
+import {addNoteToFavs, removeNoteFromFavs} from '/src/store/user'
 
 export function useFavorite(id) {
   const dispatch = useDispatch()
@@ -8,9 +8,9 @@ export function useFavorite(id) {
 
   const toggleFav = () => {
     if (favorites.includes(id)) {
-      dispatch({type: USER_ACTIONS.removeNoteFromFavs, payload: id})
+      dispatch(removeNoteFromFavs(id))
     } else {
-      dispatch({type: USER_ACTIONS.addNoteToFavs, payload: id})
+      dispatch(addNoteToFavs(id))
     }
   }
 

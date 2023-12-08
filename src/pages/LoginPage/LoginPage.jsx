@@ -10,7 +10,7 @@ import {useLocale} from '/src/hooks/useLocale'
 import {LangChanger} from '/src/components/LangChanger'
 import {PasswordField} from '/src/components/PasswordField'
 import {sendLogInRequest} from '/src/services/auth'
-import {USER_ACTIONS} from '/src/store/user'
+import {setNewUser} from '/src/store/user'
 import {PATHS} from '/src/services/router'
 import s from './LoginPage.module.scss'
 
@@ -52,10 +52,8 @@ function LogInForm() {
     if (error) {
       setLoginError(error)
     } else if (data) {
-      dispatch({
-        type: USER_ACTIONS.setNewUser,
-        payload: {token: data.token, username},
-      })
+      const {token} = data
+      dispatch(setNewUser({token, username}))
       navigate(PATHS.PERSONAL)
     }
   }

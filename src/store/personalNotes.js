@@ -1,41 +1,109 @@
-import {mockNotes} from '/src/utils/mockNotes'
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
+import {apiDeleteNote, apiFetchPersonalNotes, apiPostNewNote, apiUpdateNote} from '../services/api'
+// import {isValidNote} from '/src/services/validation'
 
-const initialState = mockNotes
-
-const PERSONAL_NOTES_ACTIONS = {
-  createNote: 'CREATE_NOTE',
-  updateNote: 'UPDATE_NOTE',
-  deleteNote: 'DELETE_NOTE',
+const STATUS_ENUM = {
+  IDLE: 'idle',
+  LOADING: 'loading',
+  SUCCEEDED: 'succeeded',
+  FAILED: 'failed',
 }
 
-export const createNoteActionCreator = newNote => ({
-  type: PERSONAL_NOTES_ACTIONS.createNote,
-  payload: newNote,
-})
-export const updateNoteActionCreator = updatedNote => ({
-  type: PERSONAL_NOTES_ACTIONS.updateNote,
-  payload: updatedNote,
-})
-export const deleteNoteActionCreator = noteToDelete => ({
-  type: PERSONAL_NOTES_ACTIONS.deleteNote,
-  payload: noteToDelete,
-})
+const initialState = {
+  notes: [],
+  status: STATUS_ENUM.IDLE,
+  error: null,
+}
 
-export const personalNotesReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case PERSONAL_NOTES_ACTIONS.createNote:
-      return [...state, action.payload]
-
-    case PERSONAL_NOTES_ACTIONS.updateNote:
-      return state.map(note => {
-        if (note.id === action.payload.id) return action.payload
-        return note
-      })
-
-    case PERSONAL_NOTES_ACTIONS.deleteNote:
-      return state.filter(({id}) => id !== action.payload.id)
-
-    default:
-      return state
+export const fetchPersonalNotes = createAsyncThunk(
+  'personalNotes/fetchPersonalNotes',
+  async token => {
+    const {data, error} = await apiFetchPersonalNotes(token)
+    if (error) {
+      throw new Error(error)
+    } else if (data) {
+      return data
+    }
   }
-}
+)
+
+export const postNewNote = createAsyncThunk(
+  'personalNotes/postNewNote',
+  async ({token, newNote}) => {
+    const {data, error} = await apiPostNewNote(newNote, token)
+    if (error) {
+      throw new Error(error)
+    } else if (data) {
+      return newNote
+    }
+  }
+)
+
+export const updateNote = createAsyncThunk(
+  'personalNotes/updateNote',
+  async ({token, updatedNote, id}) => {
+    const {data, error} = await apiUpdateNote(updatedNote, id, token)
+    if (error) {
+      throw new Error(error)
+    } else if (data) {
+      return updatedNote
+    }
+  }
+)
+
+export const deleteNote = createAsyncThunk('personalNotes/deleteNote', async ({token, id}) => {
+  const {data, error} = await apiDeleteNote(id, token)
+  if (error) {
+    throw new Error(error)
+  } else if (data) {
+    return id
+  }
+})
+
+const personalNotesSlice = createSlice({
+  name: 'personalNotes',
+  initialState,
+  reducers: {
+    updateNote(state, action) {
+      const index = state.findIndex(({id}) => id === action.payload.id)
+      state[index] = action.payload
+    },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchPersonalNotes.pending, state => {
+        state.status = STATUS_ENUM.LOADING
+      })
+      .addCase(fetchPersonalNotes.fulfilled, (state, action) => {
+        state.status = STATUS_ENUM.SUCCEEDED
+        state.notes = action.payload
+      })
+      .addCase(fetchPersonalNotes.rejected, (state, action) => {
+        state.status = STATUS_ENUM.FAILED
+        console.error(action.error.message)
+      })
+      .addCase(postNewNote.fulfilled, state => {
+        state.status = STATUS_ENUM.IDLE
+      })
+      .addCase(postNewNote.rejected, (state, action) => {
+        state.status = STATUS_ENUM.FAILED
+        console.error(action.error.message)
+      })
+      .addCase(updateNote.fulfilled, state => {
+        state.status = STATUS_ENUM.IDLE
+      })
+      .addCase(updateNote.rejected, (state, action) => {
+        state.status = STATUS_ENUM.FAILED
+        console.error(action.error.message)
+      })
+      .addCase(deleteNote.fulfilled, state => {
+        state.status = STATUS_ENUM.IDLE
+      })
+      .addCase(deleteNote.rejected, (state, action) => {
+        state.status = STATUS_ENUM.FAILED
+        console.error(action.error.message)
+      })
+  },
+})
+
+export const personalNotesReducer = personalNotesSlice.reducer
